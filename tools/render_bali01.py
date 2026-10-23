@@ -286,7 +286,9 @@ class Seg:
 
     def render(self):
         src_dur = self.tl_dur * self.speed + 0.2
-        if self.pan:
+        if isinstance(self.pan, str):
+            cx = f"'{self.pan}'"
+        elif self.pan:
             x0, x1 = self.pan
             cx = f"'{x0}+({x1}-{x0})*min(t/{self.tl_dur},1)'"
         else:
@@ -544,7 +546,7 @@ class Outro:
                 a = ease_back((tl - 1.6) / 0.6)
                 if a > 0:
                     pm = self.palm.resize((self.palm.width, max(1, int(self.palm.height * a))), Image.BILINEAR)
-                    base.alpha_composite(pm, (150 - self.palm.width // 2, int(1265 + 30 - pm.height + (1 - p) * (H - top + 80))))
+                    base.alpha_composite(pm, (110 - self.palm.width // 2, int(1385 - pm.height + (1 - p) * (H - top + 80))))
         return base
 
 
@@ -618,12 +620,11 @@ def build():
     segs = {
         "hook": Seg("hook", "D", 2.0, 3.5, x=1384, size=(792, 1100), cw=1555),
         "A1": Seg("A1", "A", 0.0, 5.3, speed=1.5, x=1312),
-        "A2": Seg("A2", "A", 9.0, 4.4, x=1110),
-        "B1": Seg("B1", "B", 0.0, 2.0, x=693),
+        "A2": Seg("A2", "A", 8.4, 4.4, pan="1192+730*clip((t-1.6)/0.6,0,1)"),
+        "B1": Seg("B1", "B", 0.0, 2.0, x=543),
         "B2": Seg("B2", "B", 4.5, 2.5, speed=0.625, x=1150),
-        "B3": Seg("B3", "B", 8.6, 2.4, x=820),
-        "B4": Seg("B4", "B", 13.1, 2.0, x=543),
-        "B5": Seg("B5", "B", 48.5, 2.5, x=600),
+        "B3": Seg("B3", "B", 8.6, 2.9, x=820),
+        "B5": Seg("B5", "B", 48.0, 4.0, x=600),
         "C": Seg("C", "C", 6.5, 4.8, x=1312),
         "D": Seg("D", "D", 3.5, 7.5, pan=(1100, 2300)),
         "E1": Seg("E1", "E", 7.5, 4.2, x=1444),
@@ -642,9 +643,8 @@ def build():
         (11.0, 15.0, Footage(segs["A2"], (1.0, 1.08)), 0.3),
         (15.0, 17.0, Footage(segs["B1"], (1.0, 1.05)), 0.4),
         (17.0, 19.5, Footage(segs["B2"], (1.03, 1.0)), 0),
-        (19.5, 21.9, Footage(segs["B3"], (1.0, 1.06)), 0),
-        (21.9, 23.9, Footage(segs["B4"], (1.06, 1.0)), 0),
-        (23.9, 26.0, Footage(segs["B5"], (1.0, 1.05)), 0),
+        (19.5, 22.4, Footage(segs["B3"], (1.0, 1.06)), 0),
+        (22.4, 26.0, Footage(segs["B5"], (1.0, 1.06)), 0),
         (26.0, 30.0, Footage(segs["C"], (1.0, 1.06)), 0.4),
         (30.0, 37.0, Footage(segs["D"], (1.0, 1.05)), 0.8),
         (37.0, 40.0, MapScene("layover"), 0.5),
@@ -664,10 +664,10 @@ def build():
         Sticker(P("1:00 am dinner", corm_i(48), bg=PEACH, pad=(32, 12), alpha=230), W / 2, 210, 15.3, 25.85),
         Sticker(P("Maine veg liya,", jost(54), pad=(38, 16), alpha=240), W / 2, 1330, 16.9, 19.8),
         Sticker(P("husband ne non-veg", jost(54), pad=(38, 16), alpha=240), W / 2, 1430, 17.3, 19.8),
-        Sticker(P("paratha", caveat(66), bg=BUTTER, rot=6), 300, 1180, 19.7, 21.85),
+        Sticker(P("paratha", caveat(66), bg=BUTTER, rot=6), 300, 1180, 19.7, 22.35),
         Sticker(P("veg meal", caveat(58), bg=MINT, rot=-5), 770, 560, 20.2, 25.85),
         Sticker(P("theek-thaak ~", caveat(50), bg=BLUSH, rot=-3), 790, 660, 20.6, 25.85),
-        Sticker(P("rice + curry", caveat(58), bg=BUTTER, rot=4), 300, 1250, 22.1, 23.85),
+        Sticker(P("rice + curry", caveat(58), bg=BUTTER, rot=4), 330, 1000, 22.6, 25.85),
         # old screens
         Doodles(26.2, 29.9),
         Sticker(P("purane screens", caveat(62), bg=MINT, rot=-4), 330, 300, 26.4, 29.85),
@@ -687,7 +687,7 @@ def main():
     scenes, overlays = build()
     enc = subprocess.Popen(
         ["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-",
-         "-vf", "noise=alls=6:allf=t,format=yuv420p", "-c:v", "libx264", "-crf", "17", "-preset", "medium",
+         "-vf", "noise=alls=6:allf=t,format=yuv420p", "-c:v", "libx264", "-crf", "19", "-maxrate", "18M", "-bufsize", "36M", "-preset", "medium",
          "-movflags", "+faststart", OUT], stdin=subprocess.PIPE)
     nframes = int(TOTAL * FPS)
     for fi in range(nframes):
