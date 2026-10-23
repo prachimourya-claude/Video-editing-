@@ -28,3 +28,11 @@ Vertical 9:16, ~52s, for Instagram Reels + YouTube Shorts. Hinglish voiceover.
 
 `bali-01-malaysia-airlines/style_frames/` — hook (window frame), meal (stickers + captions), outro (paper-cut waves + route).
 Regenerate with `python3 tools/style_frames.py <workdir> style_frames` (needs `fonts/` and `src/` frames in `<workdir>`).
+
+## Audio (v2)
+
+- Original clip audio muted.
+- Music: "Easy Lemon" by Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0.
+  Put this credit in the Instagram caption / YouTube description:
+  `Music: "Easy Lemon" Kevin MacLeod (incompetech.com) — Licensed under Creative Commons: By Attribution 4.0 — http://creativecommons.org/licenses/by/4.0/`
+- AI voiceover: Piper TTS, voice `hi_IN-priyamvada-medium`, text in `voiceover_devanagari.txt`. Mixed with `tools/mix_bali01.sh`.
