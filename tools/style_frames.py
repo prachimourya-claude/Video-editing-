@@ -14,13 +14,13 @@ jost_l = lambda s: ImageFont.truetype(F + "g3.ttf", s)
 jost = lambda s: ImageFont.truetype(F + "g3.ttf", s)
 
 CREAM = (251, 243, 230)
-PEACH = (255, 203, 178)
-BLUSH = (255, 184, 198)
-BUTTER = (255, 228, 140)
-MINT = (172, 234, 204)
-SAGE = (120, 196, 158)
-POWDER = (168, 214, 246)
-SUN = (255, 186, 48)
+PEACH = (246, 213, 193)
+BLUSH = (242, 196, 196)
+BUTTER = (247, 227, 168)
+MINT = (207, 229, 214)
+SAGE = (169, 200, 180)
+POWDER = (207, 221, 234)
+SUN = (245, 192, 74)
 INK = (86, 54, 42)
 
 
@@ -28,7 +28,7 @@ def grade(img, warmth=1.0):
     """Warm peach film grade: lifted blacks, softened saturation, bloom, grain."""
     a = np.asarray(img.convert("RGB")).astype(np.float32) / 255.0
     lum = a.mean(axis=2, keepdims=True)
-    a = lum + (a - lum) * 1.12                       # desaturate a touch
+    a = lum + (a - lum) * 0.9                        # desaturate a touch
     a = a * np.array([1.06, 1.0, 0.90]) ** warmth    # warm shift
     a = 0.07 + a * 1.08                              # lift blacks, brighten
     a = a + np.array([0.03, 0.012, -0.005]) * warmth  # peach tint in shadows
@@ -148,10 +148,10 @@ def dotted_curve(d, pts, color, r=5, step=26):
 
 # ---------- Frame 1: hook, sunrise wing in an airplane window ----------
 def frame1():
-    base = paper_bg((255, 212, 190), (255, 230, 226)).convert("RGBA")
+    base = paper_bg((250, 224, 208), (253, 238, 228)).convert("RGBA")
     light_leak(base, (980, 160), 420, (255, 214, 160), 120)
     light_leak(base, (300, 700), 300, (255, 190, 140), 60)
-    light_leak(base, (80, 1700), 420, BLUSH, 150)
+    light_leak(base, (80, 1700), 380, BLUSH, 90)
 
     ww, wh = 720, 1000
     wx, wy = (W - ww) // 2, 330
@@ -241,7 +241,7 @@ def frame2():
 
 # ---------- Frame 3: paper-cut outro, route complete, next stop Bali ----------
 def frame3():
-    base = paper_bg((186, 236, 214), (255, 244, 222)).convert("RGBA")
+    base = paper_bg((223, 238, 228), CREAM).convert("RGBA")
     light_leak(base, (820, 520), 380, (255, 236, 200), 120)
 
     # sun
@@ -268,13 +268,13 @@ def frame3():
 
     # layered paper waves from the bottom
     layers = [
-        (1150, 70, 0.0045, 0.0, (255, 240, 206)),
+        (1150, 70, 0.0045, 0.0, (247, 236, 214)),
         (1240, 80, 0.0040, 1.3, BUTTER),
-        (1330, 75, 0.0050, 2.1, (255, 188, 156)),
+        (1330, 75, 0.0050, 2.1, (248, 200, 170)),
         (1420, 70, 0.0042, 3.0, BLUSH),
-        (1520, 65, 0.0048, 4.2, (176, 222, 246)),
+        (1520, 65, 0.0048, 4.2, (240, 225, 210)),
         (1630, 60, 0.0040, 5.0, MINT),
-        (1740, 50, 0.0052, 0.7, (244, 168, 200)),
+        (1740, 50, 0.0052, 0.7, (226, 190, 200)),
     ]
     for y0, amp, freq, ph, col in layers:
         poly = [(x, y0 + amp * math.sin(x * freq + ph) + 25 * math.sin(x * freq * 2.3 + ph * 1.7)) for x in range(-10, W + 11, 6)]
@@ -302,7 +302,7 @@ def frame3():
     for a, l in [(-160, 110), (-120, 120), (-60, 120), (-20, 110), (-90, 90)]:
         r = math.radians(a)
         ex, ey = tx + l * math.cos(r), ty + l * math.sin(r) + 30
-        pd.polygon([(tx, ty), ((tx + ex) / 2 + 18 * math.sin(r), (ty + ey) / 2 - 22), (ex, ey), ((tx + ex) / 2, (ty + ey) / 2 + 6)], fill=(110, 200, 156))
+        pd.polygon([(tx, ty), ((tx + ex) / 2 + 18 * math.sin(r), (ty + ey) / 2 - 22), (ex, ey), ((tx + ex) / 2, (ty + ey) / 2 + 6)], fill=(150, 192, 165))
     shadow(base, palm.getchannel("A"), (8, 10), blur=10, alpha=70)
     base.alpha_composite(palm)
 
