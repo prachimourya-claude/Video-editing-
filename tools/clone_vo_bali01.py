@@ -7,13 +7,14 @@ usage: COQUI_TOS_AGREED=1 python3 clone_vo_bali01.py <workdir>
 <workdir>/myvoice/ref_clean.wav must hold the creator's denoised voice sample.
 Note: XTTS-v2 weights are under the Coqui Public Model License (non-commercial).
 """
-import difflib, re, subprocess, sys
+import difflib, os, re, subprocess, sys
 import numpy as np, soundfile as sf, torch
 from faster_whisper import WhisperModel
 from TTS.api import TTS
 
 BASE = sys.argv[1]
-TAKES = 3
+TAKES = int(os.environ.get("TAKES", 3))
+FIRST = int(os.environ.get("FIRST_LINE", 1))
 LINES = [
     ["मुंबई से बाली... वाया क्वालालंपुर, मलेशिया एयरलाइंस पे.", "चलो, दिखाती हूँ एक्सपीरियंस कैसा रहा!"],
     ["रात के बारह बजे बोर्डिंग.", "फ्लाइट फुल थी, रेड पर्पल सीट्स...", "और क्रू की बाटिक केबाया यूनिफॉर्म,", "सच में, मलेशिया वाली फील आ गई."],
@@ -48,6 +49,8 @@ tts = TTS("tts_models/multilingual/multi-dataset/xtts_v2")
 asr = WhisperModel("small", device="cpu", compute_type="int8")
 ref = f"{BASE}/myvoice/ref_clean.wav"
 for li, chunks in enumerate(LINES, 1):
+    if li < FIRST:
+        continue
     parts = []
     for ci, text in enumerate(chunks):
         best = None
