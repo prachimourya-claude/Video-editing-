@@ -7,11 +7,11 @@ OUT = sys.argv[2]
 W, H = 1080, 1920
 F = BASE + "/fonts/"
 caveat = lambda s: ImageFont.truetype(F + "f1.ttf", s)
-corm_i = lambda s: ImageFont.truetype(F + "f2.ttf", s)
-corm_l = lambda s: ImageFont.truetype(F + "f3.ttf", s)
+corm_i = lambda s: ImageFont.truetype(F + "g1.ttf", s)
+corm_l = lambda s: ImageFont.truetype(F + "g2.ttf", s)
 corm_m = lambda s: ImageFont.truetype(F + "f5.ttf", s)
-jost_l = lambda s: ImageFont.truetype(F + "f6.ttf", s)
-jost = lambda s: ImageFont.truetype(F + "f7.ttf", s)
+jost_l = lambda s: ImageFont.truetype(F + "g3.ttf", s)
+jost = lambda s: ImageFont.truetype(F + "g3.ttf", s)
 
 CREAM = (251, 243, 230)
 PEACH = (246, 213, 193)
@@ -21,16 +21,16 @@ MINT = (207, 229, 214)
 SAGE = (169, 200, 180)
 POWDER = (207, 221, 234)
 SUN = (245, 192, 74)
-INK = (122, 90, 74)
+INK = (86, 54, 42)
 
 
 def grade(img, warmth=1.0):
     """Warm peach film grade: lifted blacks, softened saturation, bloom, grain."""
     a = np.asarray(img.convert("RGB")).astype(np.float32) / 255.0
     lum = a.mean(axis=2, keepdims=True)
-    a = lum + (a - lum) * 0.82                       # desaturate a touch
+    a = lum + (a - lum) * 0.9                        # desaturate a touch
     a = a * np.array([1.06, 1.0, 0.90]) ** warmth    # warm shift
-    a = 0.10 + a * 0.86                              # lift blacks, soften whites
+    a = 0.07 + a * 1.08                              # lift blacks, brighten
     a = a + np.array([0.03, 0.012, -0.005]) * warmth  # peach tint in shadows
     a = np.clip(a, 0, 1)
     out = Image.fromarray((a * 255).astype(np.uint8))
@@ -148,7 +148,7 @@ def dotted_curve(d, pts, color, r=5, step=26):
 
 # ---------- Frame 1: hook, sunrise wing in an airplane window ----------
 def frame1():
-    base = paper_bg(PEACH, (250, 228, 214)).convert("RGBA")
+    base = paper_bg((250, 224, 208), (253, 238, 228)).convert("RGBA")
     light_leak(base, (980, 160), 420, (255, 214, 160), 120)
     light_leak(base, (300, 700), 300, (255, 190, 140), 60)
     light_leak(base, (80, 1700), 380, BLUSH, 90)
@@ -189,9 +189,9 @@ def frame1():
     base.alpha_composite(sl, (wx, wy))
 
     d = ImageDraw.Draw(base)
-    spaced(d, (W / 2, 175), "FLIGHT DIARY  ·  01", jost_l(30), INK + (200,), 7)
-    spaced(d, (W / 2, 1490), "MUMBAI → BALI", corm_l(92), INK, 16)
-    d.text((W / 2, 1585), "via Kuala Lumpur", font=corm_i(54), fill=(160, 112, 92), anchor="mm")
+    spaced(d, (W / 2, 175), "FLIGHT DIARY  ·  01", jost_l(34), INK, 7)
+    spaced(d, (W / 2, 1490), "MUMBAI → BALI", corm_l(96), INK, 14)
+    d.text((W / 2, 1585), "via Kuala Lumpur", font=corm_i(58), fill=(150, 92, 70), anchor="mm")
 
     # mini route
     pts = [(250, 1735), (540, 1735), (830, 1735)]
@@ -200,7 +200,7 @@ def frame1():
             d.ellipse((k - 4, y - 4, k + 4, y + 4), fill=(200, 150, 130))
     for (x, y), lab, col in zip(pts, ["BOM", "KUL", "DPS"], [BLUSH, MINT, BUTTER]):
         d.ellipse((x - 16, y - 16, x + 16, y + 16), fill=col, outline=CREAM, width=5)
-        spaced(d, (x, y + 48), lab, jost(28), INK, 6)
+        spaced(d, (x, y + 50), lab, jost(32), INK, 6)
     pl = plane_icon(54, INK + (255,)).rotate(-90, expand=True, resample=Image.BICUBIC)
     base.alpha_composite(pl, (380, 1735 - pl.height // 2))
 
@@ -225,15 +225,15 @@ def frame2():
 
     d = ImageDraw.Draw(base)
     # top label
-    pill(base, (W / 2, 210), "FLIGHT 1  ·  MUMBAI TO KL", jost(30), fg=INK, bg=CREAM, pad=(40, 20))
-    pill(base, (W / 2, 300), "1:00 am dinner", corm_i(40), fg=INK, bg=PEACH, pad=(30, 10), alpha=220)
+    pill(base, (W / 2, 210), "FLIGHT 1  ·  MUMBAI TO KL", jost(34), fg=INK, bg=CREAM, pad=(40, 20))
+    pill(base, (W / 2, 300), "1:00 am dinner", corm_i(46), fg=INK, bg=PEACH, pad=(30, 10), alpha=220)
     # handwritten stickers
     pill(base, (300, 1180), "paratha", caveat(66), fg=INK, bg=BUTTER, rot=6)
     pill(base, (770, 600), "veg meal", caveat(58), fg=INK, bg=MINT, rot=-5)
     pill(base, (790, 700), "theek-thaak ~", caveat(50), fg=INK, bg=BLUSH, rot=-3)
     # subtitle, kept above the bottom UI safe zone
-    pill(base, (W / 2, 1495), "Maine veg liya,", jost(48), fg=INK, bg=CREAM, pad=(38, 16), alpha=240)
-    pill(base, (W / 2, 1590), "husband ne non-veg", jost(48), fg=INK, bg=CREAM, pad=(38, 16), alpha=240)
+    pill(base, (W / 2, 1495), "Maine veg liya,", jost(54), fg=INK, bg=CREAM, pad=(38, 16), alpha=240)
+    pill(base, (W / 2, 1600), "husband ne non-veg", jost(54), fg=INK, bg=CREAM, pad=(38, 16), alpha=240)
 
     out = grain(base.convert("RGB"), 9, 2)
     out.save(OUT + "/style_frame_2_meal.png")
@@ -258,7 +258,7 @@ def frame3():
     path = dotted_curve(d, pts, (196, 150, 130), r=5, step=24)
     for (x, y), lab, col in zip(pts, ["Mumbai", "Kuala Lumpur", "Bali"], [BLUSH, POWDER, BUTTER]):
         d.ellipse((x - 18, y - 18, x + 18, y + 18), fill=col, outline=(255, 255, 255), width=6)
-        d.text((x, y + 52), lab, font=corm_i(40), fill=INK, anchor="mm")
+        d.text((x, y + 54), lab, font=corm_i(46), fill=INK, anchor="mm")
     # plane approaching Bali
     i = int(len(path) * 0.86)
     (x0, y0), (x1, y1) = path[i - 3], path[i + 3]
@@ -307,9 +307,9 @@ def frame3():
     base.alpha_composite(palm)
 
     d = ImageDraw.Draw(base)
-    spaced(d, (W / 2, 250), "NEXT STOP", jost_l(40), INK, 18)
+    spaced(d, (W / 2, 250), "NEXT STOP", jost_l(44), INK, 18)
     d.text((W / 2, 400), "Bali", font=corm_i(200), fill=INK, anchor="mm")
-    d.text((W / 2, 1830), "baaki trip ke liye follow karte raho", font=caveat(56), fill=INK, anchor="mm")
+    d.text((W / 2, 1830), "baaki trip ke liye follow karte raho", font=caveat(62), fill=INK, anchor="mm")
 
     out = grain(base.convert("RGB"), 7, 3)
     out.save(OUT + "/style_frame_3_outro.png")
