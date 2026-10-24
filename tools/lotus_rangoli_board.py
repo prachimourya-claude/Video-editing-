@@ -24,7 +24,8 @@ BASE_T = 2.2           # solid floor thickness
 RIDGE_H = 1.8          # ridge height above the floor
 RIDGE_GROW = 0.2       # mm added on each side of the traced outlines
 OUTER_RIM = 2.6        # width of the outer wall
-ROUND = 0.5            # top-edge rounding (stepped inset)
+SMOOTH = 0.6           # closes tiny notches in the traced outlines
+MIN_GAP_PX = 1500      # gold gaps in the outlines smaller than this get filled
 
 
 def masks(ref_path):
@@ -52,6 +53,14 @@ def masks(ref_path):
     keep = np.zeros(n, bool)
     keep[1:] = stats[1:, cv2.CC_STAT_AREA] > 2000
     cream = keep[lab].astype(np.uint8)
+    # Fill tiny gaps inside the outlines (tracing artefacts, not petals).
+    n, lab, stats, _ = cv2.connectedComponentsWithStats(((cream == 0) & (sil == 1)).astype(np.uint8))
+    small = np.zeros(n, bool)
+    small[1:] = stats[1:, cv2.CC_STAT_AREA] < MIN_GAP_PX
+    cream[small[lab] & (lab > 0)] = 1
+    # Smooth the traced edges so walls are clean curves, not pixel wobble.
+    cream = (cv2.GaussianBlur(cream.astype(np.float32), (0, 0), 3) > 0.5).astype(np.uint8)
+    sil = (cv2.GaussianBlur(sil.astype(np.float32), (0, 0), 2) > 0.5).astype(np.uint8)
     return sil, cream
 
 
@@ -62,7 +71,7 @@ def to_section(mask, mm_per_px, h):
     for c in cnts:
         if len(c) < 3:
             continue
-        c = cv2.approxPolyDP(c, 1.0, True)[:, 0, :].astype(float)
+        c = cv2.approxPolyDP(c, 0.7, True)[:, 0, :].astype(float)
         if len(c) < 3:
             continue
         polys.append([(x * mm_per_px, (h - y) * mm_per_px) for x, y in c])
@@ -78,19 +87,15 @@ def build(ref_path):
     base_cs = to_section(sil, mm_per_px, h)
     ridge_cs = to_section(ridge, mm_per_px, h)
     # Widen ridges slightly (traced lines are ~2.5 mm) and keep them inside the floor.
-    ridge_cs = ridge_cs.offset(RIDGE_GROW, join_type=1) ^ base_cs
+    ridge_cs = (ridge_cs.offset(RIDGE_GROW + SMOOTH, join_type=1)
+                        .offset(-2 * SMOOTH, join_type=1)
+                        .offset(SMOOTH, join_type=1)) ^ base_cs
     # Outer wall: a ridge band right to the edge, so powder can't spill off.
     ridge_cs += base_cs - base_cs.offset(-OUTER_RIM, join_type=1)
 
     model = Manifold.extrude(base_cs, BASE_T)
-    # Ridge: full-width body, then two inset steps for a softly rounded top.
-    body_h = RIDGE_H - ROUND
-    model += Manifold.extrude(ridge_cs, body_h + 0.3).translate((0, 0, BASE_T - 0.3))
-    step = ROUND / 2
-    for i, inset in enumerate((0.3, 0.7)):
-        cs = ridge_cs.offset(-inset, join_type=1)
-        z = BASE_T + body_h + i * step
-        model += Manifold.extrude(cs, step + 0.1).translate((0, 0, z - 0.1))
+    # Ridge: one straight wall with a flat top (no stepped edges).
+    model += Manifold.extrude(ridge_cs, RIDGE_H + 0.3).translate((0, 0, BASE_T - 0.3))
 
     # Remove slivers so the float32 STL stays manifold.
     model = model.simplify(0.02)
@@ -138,12 +143,16 @@ def heightmap_preview(model, path, px=0.12):
     Image.fromarray((np.clip(out, 0, 1) * 255).astype(np.uint8)).save(path)
 
 
-def angled_preview(model, path):
+def angled_preview(model, path, crop=None, elev=38, azim=-80):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
     from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 
+    if crop:
+        x0, x1, y0, y1 = crop
+        box = Manifold.cube((x1 - x0, y1 - y0, 20)).translate((x0, y0, -5))
+        model = model ^ box
     mesh = model.to_mesh()
     v = np.asarray(mesh.vert_properties)[:, :3]
     tri = v[np.asarray(mesh.tri_verts)]
@@ -161,9 +170,11 @@ def angled_preview(model, path):
     fc = base_col * shade[:, None]
     ax.add_collection3d(Poly3DCollection(tri, facecolors=fc, edgecolors=fc, linewidths=0.3))
     bb = model.bounding_box()
-    ax.set(xlim=(bb[0], bb[3]), ylim=(bb[1], bb[4]), zlim=(-6, 10))
-    ax.set_box_aspect((bb[3] - bb[0], bb[4] - bb[1], 16), zoom=1.1)
-    ax.view_init(elev=38, azim=-80)
+    x0, x1, y0, y1 = crop or (bb[0], bb[3], bb[1], bb[4])
+    zr = 16 if not crop else (x1 - x0) / 3
+    ax.set(xlim=(x0, x1), ylim=(y0, y1), zlim=(-zr / 2 + 2, zr / 2 + 2))
+    ax.set_box_aspect((x1 - x0, y1 - y0, zr), zoom=1.1)
+    ax.view_init(elev=elev, azim=azim)
     ax.set_axis_off()
     fig.savefig(path, bbox_inches="tight", facecolor=fig.get_facecolor())
 
@@ -192,6 +203,8 @@ if __name__ == "__main__":
           f"genus {model.genus()}, parts {len(model.decompose())}")
     heightmap_preview(model, out / "lotus_rangoli_preview_top.png")
     angled_preview(model, out / "lotus_rangoli_preview_angle.png")
+    angled_preview(model, out / "lotus_rangoli_preview_closeup.png",
+                   crop=(-45, 10, -52, -5), elev=30, azim=-60)
     if "--stl" in sys.argv:
         write_stl(model, out / "lotus_rangoli_board.stl")
         print("wrote", out / "lotus_rangoli_board.stl")
