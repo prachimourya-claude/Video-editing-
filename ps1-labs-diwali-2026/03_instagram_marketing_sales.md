@@ -61,7 +61,7 @@ designed by us and 3D printed layer by layer, made to order.
 📦 Ships across India · Order by 1 Nov for Diwali delivery
 💬 DM "DIWALI" or tap the link in bio to order on WhatsApp
 
-#ps1labs #diwalidecor #diwali2026 #3dprinting #diwaligifts
+#psonelabs #ps1labs #diwalidecor #diwali2026 #3dprinting #diwaligifts
 #homedecorindia #madeinindia #diwalihampers #rangoli #festivedecor
 ```
 
@@ -71,7 +71,7 @@ Client gifts that people actually keep. 🏢✨
 Your logo on keychains, coasters & desk stands, 3D printed in-house.
 From 25 pieces · Delivered before Diwali.
 DM "BULK" for the price sheet.
-#corporategifting #diwalicorporategifts #customgifts #ps1labs
+#corporategifting #diwalicorporategifts #customgifts #psonelabs #ps1labs
 ```
 
 Use 8–12 hashtags: 3 big (#diwali2026 #diwalidecor), 4–5 niche (#3dprintedindia #diwalihampers), 2–3 local (#mumbaigifting, #punehomedecor, i.e. your city).

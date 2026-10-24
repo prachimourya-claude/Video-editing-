@@ -80,7 +80,7 @@ Orders confirmed by 29 October are delivered before Dhanteras (6 Nov).
 
 Warm regards,
 {Your name}
-PS1 Labs · {phone} · instagram.com/ps1labs
+PS1 Labs · {phone} · instagram.com/psonelabs
 ```
 
 ## Walk-in pitch (shops, boutiques, offices) — 60 seconds

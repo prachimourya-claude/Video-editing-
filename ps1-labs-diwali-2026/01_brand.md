@@ -61,13 +61,13 @@ After Diwali, keep the indigo + marigold core and drop the red. That gives you a
 
 - Kraft box + **indigo/marigold sticker** with the logo (₹2–4 per sticker from a local printer or Vistaprint).
 - Marigold-yellow crinkle paper inside.
-- A **thank-you card**: "Printed with light by PS1 Labs · Tag us @ps1labs and get 10% off your next order". That card brings in user photos (UGC) and repeat orders.
+- A **thank-you card**: "Printed with light by PS1 Labs · Tag us @psonelabs and get 10% off your next order". That card brings in user photos (UGC) and repeat orders.
 - For gifts: a small handwritten name tag. Costs nothing and gets photographed.
 
 ## Instagram profile setup (do this today)
 
-- **Handle:** `@ps1labs` (or `@ps1.labs` if it's taken). Use the same name on WhatsApp Business.
-- **Name field** (searchable): `PS1 Labs | 3D Printed Décor & Gifts`
+- **Handle:** `@psonelabs` (your existing page). The brand is written "PS1 Labs" but the handle spells "psone", so put **both spellings in the Name field** and people find you whichever one they search. Use the same handle on WhatsApp Business.
+- **Name field** (searchable): `PS1 Labs (PS One) | 3D Printed Décor & Gifts`
 - **Bio:**
   ```
   ✨ Modern Indian décor, 3D printed to order
