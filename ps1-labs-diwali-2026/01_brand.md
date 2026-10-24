@@ -1,82 +1,88 @@
-# 01 — The PS1 Labs Brand
+# 01 — The PSOne Labs Brand
+
+You already have a good brand base: the logo, an earthy colour palette, and a hero product (the elephant incense holder). **Don't rebrand for Diwali.** Keep everything and add a festive layer on top.
+
+## What you already have (keep it)
+
+- **Name:** PSOne Labs. Handle `@psonelabs`. Use exactly this spelling everywhere: posts, boxes, invoices, WhatsApp.
+- **Logo:** cream circle with a 3D printer icon printing a twisted vase, "PSOne" in terracotta + olive, "Labs" below, and a small heart. It's clean, warm and handmade-feeling, which fits gifting.
+- **Line used on posts:** "Create · Innovate".
+- **Look:** cream backgrounds, earthy tones, a soft "studio" feel, Hinglish story-style reels ("Idea se model tak ka safar").
 
 ## Positioning
 
-> **PS1 Labs makes modern Indian décor and personalised gifts, designed in-house and 3D printed to order.**
+> **PSOne Labs designs and 3D prints thoughtful décor and personalised gifts in Mumbai, made to order, one layer at a time.**
 
 Why people should pick you over a Diwali market stall or Amazon:
 
-1. **Personalised**: names, logos, initials, dates. Mass-market sellers can't do this cheaply; you can.
-2. **Designs nobody else has**: geometric, lattice and jaali patterns that only 3D printing makes possible.
-3. **Made to last**: reusable every year, unlike clay diyas or paper kandils.
-4. **Made in India, by a small studio**: a real person behind the brand, which you show on camera.
+1. **Your own designs**: the elephant holder was designed by you, not bought from a catalogue. Say so in every post ("Designed by us, printed in Mumbai").
+2. **Personalised**: names, initials and logos. Mass-market sellers can't do this cheaply.
+3. **Long-lasting**: reusable every year, unlike clay diyas or paper kandils.
+4. **A real maker behind it**: your "idea se model tak" story reels are your biggest trust-builder. Keep making them.
 
 **Who buys**
 
 | Customer | What they want | What you sell them |
 |---|---|---|
-| Urban home-makers, 25–45 | A home that looks "Pinterest-y" for Diwali | Lanterns, diya sets, rangoli tiles |
-| Gift-givers (siblings, couples, NRIs sending home) | A gift that feels thoughtful, not generic | Personalised nameplates, keychains, hampers |
-| Small businesses, offices, shops | Client / staff gifts with their logo, on budget | Logo coasters, desk stands, keychains in bulk |
+| Mumbai home-makers, 25–45 | A pooja corner and home that look beautiful for Diwali | Elephant incense holder, diya set, rangoli tiles |
+| Gift-givers (siblings, couples, NRIs sending home) | A gift that feels thoughtful, not generic | Personalised nameplates, keychains, gift boxes |
+| Small businesses and offices in Mumbai | Client / staff gifts with their logo, on budget | Logo keychains, coasters, desk stands |
 
-## Name, tagline, voice
+## Tagline and voice
 
-- **Name:** keep **PS1 Labs**. "Labs" signals design + technology, which is your edge. Write it as `PS1 Labs` everywhere, the same way every time.
-- **Tagline options** (pick one and use it everywhere):
-  - **"Printed with light."** ← recommended for Diwali, and it can stay after Diwali
-  - "Layer by layer, made for you."
-  - "Modern Indian, made to order."
+- **Brand tagline:** keep **"Create · Innovate"** on graphics. For captions and bios, a warmer line helps: **"Designed with love, printed layer by layer."** The heart in your logo already says this.
 - **Diwali campaign line:** **"Is Diwali, kuch naya jalao."** (This Diwali, light something new.)
-- **Voice:** warm, proud of the craft, a little playful. Hinglish in reels and captions; clean English on the price sheet and vendor pitch.
-  - ✅ "Har layer ek-ek karke print hoti hai, 6 ghante lagte hain ek lantern ko."
+- **Elephant angle for Diwali:** elephants stand for prosperity and are linked with **Gaja Lakshmi**, so the elephant holder fits Lakshmi Puja as naturally as it fit Ganesh Chaturthi. Use the line **"Ganpati ke baad, ab Lakshmi ji ke liye."**
+- **Voice:** warm, proud of the craft, a little playful. Hinglish in reels and captions; clean English on the price sheet and bulk pitch.
+  - ✅ "Har layer ek-ek karke print hoti hai, 4 ghante lagte hain ek elephant ko."
   - ❌ "BEST QUALITY CHEAPEST PRICE ORDER NOW!!!"
 
-## Visual identity
+## Colours (taken from your logo)
 
-**Colours**
-
-| Role | Colour | Hex |
+| Role | Colour | Approx. hex |
 |---|---|---|
-| Primary (night sky) | Deep indigo | `#1E1B4B` |
-| Accent (diya flame) | Marigold | `#F59E0B` |
-| Secondary (festive) | Kumkum red | `#B91C1C` |
-| Light background | Warm ivory | `#FFF7ED` |
-| Text on light | Charcoal | `#1F2937` |
+| Primary | Olive green | `#6B7A3A` |
+| Accent | Terracotta / peach | `#D9825B` |
+| Background | Warm cream | `#FBF6EE` |
+| Soft accent | Sage | `#A3A86B` |
+| Text | Dark brown-charcoal | `#3A2F28` |
+| **Diwali-only accent** | Diya gold / marigold | `#E0A526` |
 
-After Diwali, keep the indigo + marigold core and drop the red. That gives you a year-round brand.
+For Diwali, add **gold and marigold** (marigold flowers, diya glow, gold silk PLA) on top of the cream/olive/terracotta base. Don't switch to the red-and-gold look every other brand uses. Your earthy palette will stand out in a feed full of red.
 
-**Fonts** (free on Google Fonts): **Poppins SemiBold** for headings and prices, **Inter** for body text, and **Tiro Devanagari Hindi** for Hindi words like "शुभ दीपावली".
+**Fonts:** your posts use a serif for headings, a script for accents and a bold condensed font for reel titles. Pick **one of each** and use them on every post, e.g. *Playfair Display* (headings), *Great Vibes* or *Dancing Script* (accents) and *Bebas Neue* (reel titles). Fewer fonts make the page look more premium.
 
-**Logo direction.** Make it in Canva today; a designer can refine it later.
-- A wordmark `PS1 Labs` in Poppins Bold, with the **"1" drawn as a diya flame** or as stacked lines (print layers).
-- Icon version: the flame-"1" alone inside an indigo circle, for the profile picture and the stamp on boxes.
+## Photography: the biggest fix
 
-**Photography style.** This alone makes you look premium.
-- Dark indigo or black background, warm fairy lights out of focus behind the product, product lit from the side.
-- Always shoot the lantern/diya **switched on** in a dim room. The light pattern on the wall is your best sales shot.
-- One "hand holding the product" shot per item for scale.
-- Shoot vertical (9:16) first; crop to 4:5 for feed posts.
+Several of your current posts look like **rendered or AI-generated mock-ups** (the elephant on a wood slice, the studio desk scene). They're pretty, but a new customer seeing a page with 2 followers will wonder, "Is this real? What will I actually receive?"
+
+- **For every product, post at least one real photo and one real video** of the actual print: in your hand, on the A1 bed, being packed. Real beats perfect.
+- Keep using mock-ups for *idea* posts ("coming soon"), but label them, e.g. "concept render".
+- Setup: cream cloth or chart paper, a window with daylight from the side, phone at product height. Add marigold flowers, a brass diya or rangoli powder as Diwali props.
+- **Glow shots** (diyas, lanterns): a dim room, warm fairy lights out of focus behind, shot vertically.
+- Your Bambu A1 has a built-in camera that records **timelapses**. Turn them on for every Diwali print (Bambu Studio / Handy app → timelapse). That's free reel footage.
 
 ## Packaging (cheap but memorable)
 
-- Kraft box + **indigo/marigold sticker** with the logo (₹2–4 per sticker from a local printer or Vistaprint).
-- Marigold-yellow crinkle paper inside.
-- A **thank-you card**: "Printed with light by PS1 Labs · Tag us @psonelabs and get 10% off your next order". That card brings in user photos (UGC) and repeat orders.
-- For gifts: a small handwritten name tag. Costs nothing and gets photographed.
+- Kraft box + a **round cream sticker of your logo** (₹2–4 each from a local printer in Mumbai or Vistaprint).
+- Dried marigold petals or yellow crinkle paper inside.
+- A **thank-you card**: "Designed with love by PSOne Labs · Tag @psonelabs and get 10% off your next order". This brings in customer photos and repeat orders.
+- For gifts: a small handwritten name tag.
 
-## Instagram profile setup (do this today)
+## Instagram profile fixes (do these today)
 
-- **Handle:** `@psonelabs` (your existing page). The brand is written "PS1 Labs" but the handle spells "psone", so put **both spellings in the Name field** and people find you whichever one they search. Use the same handle on WhatsApp Business.
-- **Name field** (searchable): `PS1 Labs (PS One) | 3D Printed Décor & Gifts`
-- **Bio:**
+Your profile right now: 5 posts, 2 followers, a good bio, **no link, no highlights**. Your reels already reach **276–485 views** with only 2 followers, which means Instagram is showing them to strangers. **Reels are your channel. Post more of them.**
+
+- **Name field** (searchable): `PSOne Labs | 3D Printed Gifts & Décor`. Instagram search reads this field, so the keywords bring discovery.
+- **Bio** for Diwali:
   ```
-  ✨ Modern Indian décor, 3D printed to order
-  🪔 Diwali Collection is live, personalised gifts
-  🏢 Bulk & corporate orders: DM "BULK"
-  📦 Ships across India · Order by 1 Nov for Diwali
-  👇 Shop on WhatsApp
+  ✨ Designed with love, 3D printed in Mumbai
+  🪔 Diwali Collection live · Personalised gifts
+  🏢 Bulk / corporate gifts: DM "BULK"
+  📦 Pan-India shipping · Order by 1 Nov for Diwali
+  👇 Order on WhatsApp
   ```
-- **Link:** a WhatsApp click-to-chat link (`wa.me/91XXXXXXXXXX?text=Hi%20PS1%20Labs%2C%20I%20want%20to%20order`) or a Linktree with WhatsApp + catalogue.
-- **Highlights** (indigo covers with marigold icons): `Diwali 🪔` · `Prices` · `How to Order` · `Bulk / Corporate` · `Reviews` · `Behind the Print`
-- Switch to a **Business account** so you get insights and the "Contact" and "Book" buttons.
-- **Pin 3 posts:** the collection launch carousel, a hero lantern reel, and a "How to order" post.
+- **Link:** add a WhatsApp click-to-chat link: `wa.me/91XXXXXXXXXX?text=Hi%20PSOne%20Labs%2C%20I%20want%20to%20order`. "Order via DM" with no link loses impatient buyers.
+- **Highlights** (cream covers with olive icons, made in Canva): `Diwali 🪔` · `Prices` · `How to Order` · `Bulk` · `Reviews` · `Making Of`
+- **Pin 3 posts:** the Diwali launch carousel, the best "making of" reel, and a "How to order" post.
+- **Followers:** invite your phone contacts and friends to follow (Settings → Follow and invite friends), and share every reel to your WhatsApp status. Getting from 2 to 100+ followers makes the page look trustworthy to strangers.

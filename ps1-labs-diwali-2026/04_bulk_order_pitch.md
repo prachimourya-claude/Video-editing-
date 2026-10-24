@@ -1,17 +1,17 @@
 # 04 — Pitching Vendors & Businesses for Bulk Orders
 
-Bulk orders fill your printers with predictable revenue. Diwali corporate budgets are mostly decided by mid-October, so target **late deciders and small businesses** now, and use the same pitch for **wedding return gifts (Nov–Feb)** and **New Year / client gifts (December)**.
+Bulk orders fill your printer with predictable revenue. Diwali corporate budgets are mostly decided by mid-October, so target **late deciders and small businesses** now, and use the same pitch for **wedding return gifts (Nov–Feb)** and **New Year / client gifts (December)**.
 
 ## Who to pitch (in order of how fast they say yes)
 
 | Segment | Why they buy | What to offer |
 |---|---|---|
 | **Small businesses with clients**: CAs, doctors/dentists, real-estate brokers, insurance agents, jewellers, car dealers, gyms, salons, cafés | They gift 25–200 clients and want their logo on something | Logo keychains, coaster sets, desk stands |
-| **Startups / offices / co-working spaces** | Employee Diwali gifts with a "techy" feel | Desk stand + keychain combo, Roshni Box with a logo sticker |
-| **Gift shops, home-décor boutiques, Diwali pop-up stalls** (resellers) | New, unique stock with good margin | Lanterns, diya sets, rangoli tiles at wholesale |
+| **Startups / offices / co-working spaces** | Employee Diwali gifts with a "techy" feel | Logo keychains + coasters, Roshni Box with a logo sticker |
+| **Gift shops, home-décor boutiques, Diwali pop-up stalls** (resellers) | New, unique stock with good margin | Elephant incense holders, diya sets, rangoli tiles at wholesale |
 | **Corporate gifting agencies / hamper makers** | They need a unique item to add to sweets/dry-fruit hampers | Diyas, rangoli tiles, logo keychains as hamper inserts |
 | **Event / wedding planners** | Return gifts, table décor | Personalised name diyas, initials keychains |
-| **Societies / RWAs / schools** | Diwali events, prizes, décor | Lanterns for common areas, rangoli tiles |
+| **Societies / RWAs / schools** | Diwali events, prizes, décor | Rangoli tiles, diyas, keychain prizes |
 
 Build a list of **50 names** in a Google Sheet (name · business · contact · segment · date pitched · status · follow-up date). Sources: your own contacts, family's business network, Google Maps ("gift shop near me", "CA office"), LinkedIn (HR / admin / office managers), local WhatsApp business groups, IndiaMART buyer requests.
 
@@ -37,10 +37,10 @@ For **resellers** (shops): wholesale at about **50% of your retail price**, mini
 ## WhatsApp pitch (first message, short)
 
 ```
-Hi {Name}, this is {Your name} from PS1 Labs 🪔
+Hi {Name}, this is {Your name} from PSOne Labs 🪔
 
 We 3D print custom Diwali gifts with your business logo:
-keychains, coaster sets and desk stands that your clients
+keychains and coaster sets that your clients
 will actually keep and use.
 
 ✅ From 25 pcs · starts at ₹65/pc
@@ -61,13 +61,12 @@ Subject: Diwali gifts with {Company}'s logo, delivered before 6 Nov
 
 Hi {Name},
 
-I'm {Your name}, founder of PS1 Labs, a design studio that 3D prints
-custom décor and gifts in {City}.
+I'm {Your name}, founder of PSOne Labs, a design studio that 3D prints
+custom décor and gifts in Mumbai.
 
 For Diwali we're making branded gifts for teams and clients:
   • Logo keychains, from ₹65/pc
   • Coaster sets with cork base, from ₹220/set
-  • Desk pen + phone stands, from ₹299/pc
   • "Roshni Box": LED diyas + rangoli stencil + logo card, from ₹449
 
 Unlike printed mugs or diaries, these are made specifically for you,
@@ -80,17 +79,17 @@ Orders confirmed by 29 October are delivered before Dhanteras (6 Nov).
 
 Warm regards,
 {Your name}
-PS1 Labs · {phone} · instagram.com/psonelabs
+PSOne Labs · {phone} · instagram.com/psonelabs
 ```
 
 ## Walk-in pitch (shops, boutiques, offices) — 60 seconds
 
-Carry: 1 lantern (switched on), 1 diya set, 3 keychains with *local* business logos, the price sheet, and a QR code to your Instagram.
+Carry: 1 gold elephant (with an incense stick lit), 1 diya set (switched on), 3 keychains with *local* business logos, the price sheet, and a QR code to your Instagram.
 
 1. **Open (10 s):** "Hi, I'm {name}, I make 3D printed Diwali décor locally. Can I show you something in 1 minute?"
-2. **Show (20 s):** switch the lantern on in their hand. Let the product do the talking.
+2. **Show (20 s):** hand them the elephant and switch on a diya. Let the product do the talking.
 3. **Make it theirs (15 s):** For shops: "You'd sell this at ₹999, you buy it at ₹500." For businesses: "Imagine your logo on this for every client."
-4. **Easy yes (15 s):** "Start with just 10 pieces / 25 pieces. I'll deliver by {date}." For shops, offer **sale-or-return on the first 5 lanterns**: low risk for them, and it gets you into the shop.
+4. **Easy yes (15 s):** "Start with just 10 pieces / 25 pieces. I'll deliver by {date}." For shops, offer **sale-or-return on the first 5 elephants**: low risk for them, and it gets you into the shop.
 
 ## Objection handling
 
@@ -99,7 +98,7 @@ Carry: 1 lantern (switched on), 1 diya set, 3 keychains with *local* business lo
 | "Too expensive." | "Compared to a ₹300 mug, this is personalised and they'll keep it on their desk for years. I can also do a smaller version at ₹___ for the same quantity." |
 | "We've already ordered gifts." | "Perfect, this works as an add-on in the hamper. Or keep me in mind for New Year client gifts. Can I send you the price sheet?" |
 | "Is plastic okay?" | "It's PLA, a plant-based plastic, and these are made to be kept for years, not thrown away like wrapping and boxes." |
-| "Will it be ready in time?" | "Order by 29 Oct and I guarantee delivery by 5 Nov. I only take as many orders as my printers can finish." |
+| "Will it be ready in time?" | "Order by 29 Oct and I guarantee delivery by 5 Nov. I only take as many orders as I can finish on time." |
 | "Can I see it first?" | "Yes, I'll drop a sample tomorrow / send a video of your logo version." |
 | "Send details, I'll think about it." | "Sure, sending now. I'm closing Diwali bulk slots on 29 Oct. Should I hold one for you?" |
 
