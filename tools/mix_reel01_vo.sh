@@ -35,3 +35,6 @@ afade=t=in:d=0.4,afade=t=out:st=$(python3 -c "print($TOTAL-2)"):d=2[m];\
 [md][vo]amix=inputs=2:normalize=0,alimiter=limit=0.89[out]" -map "[out]" mix_vo.wav
 ffmpeg -v error -y -i diwali01_video_only.mp4 -i mix_vo.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 192k \
   -shortest -movflags +faststart diwali01_final_voiceover.mp4
+# voice only (music to be added in the Instagram app)
+ffmpeg -v error -y -i diwali01_video_only.mp4 -i vo_track.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 192k \
+  -shortest -movflags +faststart diwali01_final_voice_only.mp4

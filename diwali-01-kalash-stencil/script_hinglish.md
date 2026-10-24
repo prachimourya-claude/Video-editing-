@@ -53,7 +53,8 @@ Music: light festive instrumental (shehnai/sitar + soft percussion), ducked unde
 
 ## Final reel (night style, creator's voiceover)
 
-`diwali01_reel_final_voiceover.mp4`: 25.8s, 1080x1920, the creator's own voiceover + "Vadodora" ducked under it.
+`diwali01_reel_final_voice_only.mp4`: 25.8s, 1080x1920, the creator's own voiceover only; music is added in the Instagram app.
+(`tools/mix_reel01_vo.sh` still also writes `diwali01_final_voiceover.mp4`, a version with "Vadodora" ducked under the voice.)
 Same look as the approved teaser; every clip plays inside a gold arch window. The product sold is the plain white
 stencil, so the coloured rangoli (E = VID-20261024-WA0013.mp4) appears once, for 2.4s at "perfect rangoli ready".
 The "Upar shubh kalash, neeche kamal" line was dropped by the creator, so its on-screen pointers are gone too.
