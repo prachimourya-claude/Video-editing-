@@ -420,12 +420,13 @@ def night_bg(seed=3):
 
 
 # ---------------------------------------------------------------- footage
-def footage(name, ss, src_dur, out_dur, zoom=(1.0, 1.08), center=(0.5, 0.5)):
-    """Yield graded RGBA frames (W x H) of a clip; src_dur of source stretched to out_dur, with a push-in."""
+def footage(name, ss, src_dur, out_dur, zoom=(1.0, 1.08), center=(0.5, 0.5), grade=GRADE, pre=""):
+    """Yield graded RGBA frames (W x H) of a clip; src_dur of source stretched to out_dur, with a push-in.
+    pre is an ffmpeg filter run first (e.g. "transpose=1," to stand a landscape clip upright)."""
     n = int(round(out_dur * FPS))
     k = out_dur / src_dur
-    vf = (f"setpts=(PTS-STARTPTS)*{k:.5f},fps={FPS},scale={W}:{H}:force_original_aspect_ratio=increase:flags=lanczos,"
-          f"crop={W}:{H},{GRADE},tpad=stop_mode=clone:stop_duration=2,format=rgb24")
+    vf = (f"{pre}setpts=(PTS-STARTPTS)*{k:.5f},fps={FPS},scale={W}:{H}:force_original_aspect_ratio=increase:flags=lanczos,"
+          f"crop={W}:{H},{grade},tpad=stop_mode=clone:stop_duration=2,format=rgb24")
     p = subprocess.Popen(["ffmpeg", "-v", "error", "-ss", str(ss), "-t", str(src_dur + 0.2), "-i", f"{BASE}/src/{name}.mp4",
                           "-vf", vf, "-frames:v", str(n), "-f", "rawvideo", "-"], stdout=subprocess.PIPE)
     fr = None

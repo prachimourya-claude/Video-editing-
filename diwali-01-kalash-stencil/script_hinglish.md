@@ -51,21 +51,24 @@ Music: light festive instrumental (shehnai/sitar + soft percussion), ducked unde
 - Title: `A Unique Diwali Rangoli: Kalash Stencil 🪔 #shorts`
 - Description: the caption above, plus the music credit.
 
-## Draft v2 (motion-graphics cut, plain stencil)
+## Reel v3 (night style, real rangoli footage)
 
-`diwali01_draft_v2_music_only.mp4`: 30s, 1080x1920, music only, waiting for the voiceover.
-Render: `python3 tools/render_diwali01.py <workdir> <workdir>/diwali01_video_only.mp4`, then `tools/mix_diwali01.sh <workdir>`.
+`diwali01_reel_v3_night_music_only.mp4`: 30s, 1080x1920, music only, waiting for the voiceover.
+Same look as the approved teaser (night-blue sky, gold Mughal arches, sky lanterns, kandils, line fireworks, diyas);
+every clip plays inside a gold arch window.
+Render: `cd tools && python3 render_reel01_night.py <workdir> <workdir>/diwali01_video_only.mp4`, then `tools/mix_diwali01.sh <workdir>`.
+
+New footage: D = VID-20261024-WA0012.mp4 (landscape, stood upright with transpose; hand on the filled stencil, then the finished rangoli),
+E = VID-20261024-WA0013.mp4 (vertical; hand smoothing the rangoli, then finished).
 
 | Time | Scene | Voiceover line |
 |---|---|---|
-| 0.0–3.2 | Night sky, fireworks, marigold toran drops in, 5 diyas light up. "Diwali aa rahi hai!" / "Is baar rangoli ho kuch UNIQUE" | 1 |
-| 3.2–7.2 | 3x3 grid of identical grey market stencils, "sab ek jaise!"; centre tile flips to our (plain white) kalash and zooms in | 2 |
-| 7.2–13.2 | Printer clip + lotus pieces printing. "Humne khud design kiya!", "Designed & 3D printed by Psone Labs", "Special: Dhanteras & Diwali" | 3 |
-| 13.2–19.2 | Hand-held stencil, slow-mo. "Kalash Rangoli Stencil", pointers "Upar: Shubh Kalash" and "Neeche: Kamal" | 4 |
-| 19.2–25.2 | Plain stencil drops on a red-oxide floor; six bowls of rangoli powder pop in and pinches of colour arc into the stencil; then it glows, diyas light up, fireworks. Steps "1 Stencil rakho · 2 Rangoli bharo · 3 Rangoli ready!", "Perfect rangoli!" | 5 |
-| 25.2–30.0 | Stencil clip, "Dhanteras se pehle order karo!", "DM to order", then end card: Psone Labs, शुभ दीपावली | 6 |
-
-The marigold toran, floating sparkles and a warm flash on each cut run across the whole reel.
+| 0.0–3.2 | Finished rangoli (E) in the arch, sky lanterns rising. "IS DIWALI" / "rangoli ho" / "kuch unique!" | 1 |
+| 3.2–7.2 | Grid of dull market stencils, "sab ek jaise!"; centre tile flips to our stencil in a small gold arch and grows. "Humara design" | 2 |
+| 7.2–13.2 | Printer clips in the arch. "Humne khud design kiya!", "Designed & 3D printed by Psone Labs", "Special: Dhanteras & Diwali" | 3 |
+| 13.2–19.2 | Hand-held stencil, slow-mo, tall arch. "Kalash Rangoli Stencil", gold pointers "Upar: Shubh Kalash", "Neeche: Kamal" | 4 |
+| 19.2–25.2 | Real rangoli: stencil being set (D) then finished (E). "Bas 3 steps!", chips 1-2-3, "Perfect rangoli!", line fireworks | 5 |
+| 25.2–30.0 | Finished rangoli (D) with "Dhanteras se pehle order karo!" + "DM to order", then dusk end card: lotus, Psone Labs, KALASH RANGOLI STENCIL, DM to order, diyas, शुभ दीपावली | 6 |
 
 Music: "Vadodora" by Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0. Put this in the caption / description:
 `Music: "Vadodora" Kevin MacLeod (incompetech.com) — Licensed under Creative Commons: By Attribution 4.0 — http://creativecommons.org/licenses/by/4.0/`
