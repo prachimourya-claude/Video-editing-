@@ -1,6 +1,6 @@
 """Render the Diwali 01 main reel (Psone Labs Kalash rangoli stencil) in the approved teaser style:
 night-blue sky to purple/pink, gold Mughal arches, sky lanterns, kandils, line fireworks, diyas.
-Footage plays inside gold arch windows. 30s, 9:16, one voiceover line per segment.
+Footage plays inside gold arch windows. 25.8s, 9:16, timed to the creator's voiceover (one line per segment).
 
 usage: cd tools && python3 render_reel01_night.py <workdir> <out.mp4> [segment ...]
 <workdir>/src needs A.mp4 B.mp4 C.mp4 (WA0009/10/11, white stencil) and E.mp4 (WA0013, real rangoli; used once).
@@ -19,11 +19,11 @@ BASE, OUT = sys.argv[1], sys.argv[2]
 ONLY = sys.argv[3:]
 SEGMENTS = [
     ("n1", 0.0, 3.2),    # Is Diwali, aapki rangoli ho kuch unique!
-    ("n2", 3.2, 7.2),    # Market mein stencils toh bahut hain... par sab ek jaise.
-    ("n3", 7.2, 13.2),   # Isliye humne khud design kiya, special Dhanteras aur Diwali ke liye.
-    ("n4", 13.2, 19.2),  # Ye hai hamara Kalash stencil. Upar shubh kalash, aur neeche kamal.
-    ("n5", 19.2, 25.2),  # Bas stencil rakho, rang bharo... aur perfect rangoli ready!
-    ("n6", 25.2, 30.0),  # Dhanteras se pehle apna order karo, abhi DM karo! + end card
+    ("n2", 3.2, 7.2),    # Market mein stencils toh bahut hain... par sab ek jaise hain.
+    ("n3", 7.2, 12.4),   # Isliye humne khud design kiya hai, special Diwali aur Dhanteras ke liye.
+    ("n4", 12.4, 16.0),  # Ye hai hamara Kalash stencil.
+    ("n5", 16.0, 21.0),  # Bas stencil rakho, rang bharo, aur perfect rangoli ready!
+    ("n6", 21.0, 25.8),  # Diwali se pehle apna order karo, abhi DM karo! + end card
 ]
 # clean, slightly rich grade for the phone clips (no warm cast; the night frame supplies the mood)
 CLEAN = "eq=contrast=1.05:saturation=1.12:brightness=0.02,unsharp=5:5:0.6"
@@ -72,22 +72,6 @@ def chip(text, font, fill=(46, 30, 92), fg=T.CREAM, pad=(36, 18)):
     dd.rounded_rectangle((4, 4, 4 + w, 4 + h), radius=h // 2, fill=fill + (235,), outline=T.GOLD + (255,), width=3)
     dd.text((4 + w / 2, 4 + h / 2), text, font=font, fill=fg, anchor="mm")
     return R.with_shadow(im, offset=(0, 6), blur=12, alpha=120, color=(4, 4, 20))
-
-
-def pointer(f, im, lx, ly, tx, ty, t, t0):
-    """Chip at (lx, ly) with a gold curve drawn out to (tx, ty) on the footage."""
-    if t < t0:
-        return
-    p = ease_out((t - t0) / 0.5)
-    sx = lx - im.width / 2 + 50
-    mx, my = (sx + tx) / 2, min(ly, ty) - 60
-    pts = [((1 - u) ** 2 * sx + 2 * (1 - u) * u * mx + u * u * tx, (1 - u) ** 2 * ly + 2 * (1 - u) * u * my + u * u * ty)
-           for u in np.linspace(0, p, max(2, int(30 * p)))]
-    d = ImageDraw.Draw(f)
-    d.line(pts, fill=T.GOLD + (255,), width=6, joint="curve")
-    if p > 0.95:
-        d.ellipse((tx - 11, ty - 11, tx + 11, ty + 11), fill=T.GOLD + (255,), outline=T.CREAM + (255,), width=4)
-    TT.rise(f, im, lx, ly, t, t0, 0.4, dy=0, scale_from=0.7)
 
 
 def lotus(scale=0.6):
@@ -192,7 +176,7 @@ def seg_n3(t0, t1):
     b = T.glow_text("design kiya!", T.yeseva(130), (T.GOLD_L, T.GOLD))
     badge = chip("Designed & 3D printed by Psone Labs", T.mont(30))
     spec = chip("Special: Dhanteras & Diwali", T.mont(34), fill=(120, 26, 96))
-    a_dur, b_dur = 3.8, 2.2
+    a_dur, b_dur = 3.2, 2.0
     frames = [fit(f, 0.9, (540, 600), (540, 1050)) for f in R.footage("C", 2.0, 3.6, a_dur, (1.0, 1.1), (0.5, 0.4), grade=CLEAN)] + \
         [fit(f, 1.2, (540, 420), (540, 1050)) for f in R.footage("B", 9.2, 2.6, b_dur, (1.0, 1.0), grade=CLEAN)]
     dur = t1 - t0
@@ -211,21 +195,17 @@ def seg_n3(t0, t1):
 
 
 def seg_n4(t0, t1):
-    """Product: hand-held stencil in slow motion inside a tall arch, with gold pointers."""
+    """Product: the whole hand-held stencil in slow motion inside a tall arch."""
     aw, ah, ay = 1000, 1560, 330
     over = night_frame(aw, ah, ay, 9, stars=60)
     title = T.glow_text("Kalash Rangoli Stencil", T.yeseva(84), (T.GOLD_L, T.GOLD))
-    up = chip("Upar: Shubh Kalash", T.mont(38))
-    dn = chip("Neeche: Kamal", T.mont(38), fill=(120, 26, 96))
     dur = t1 - t0
-    for i, fr in enumerate(R.footage("B", 0.0, 4.0, dur, (1.0, 1.0), grade=CLEAN)):
+    for i, fr in enumerate(R.footage("B", 0.0, 2.6, dur, (1.0, 1.0), grade=CLEAN)):
         t = t0 + i / FPS
         lt = t - t0
         f = fit(fr, 0.75, (590, 750), (540, 1190))
         f.alpha_composite(over)
         TT.rise(f, title, W / 2, 190, lt, 0.15, 0.6, dy=0, scale_from=0.85)
-        pointer(f, up, 790, 600, 535, 880, lt, 1.0)
-        pointer(f, dn, 790, 1790, 535, 1420, lt, 2.6)
         TT.dip(f, lt, dur)
         yield f
 
@@ -251,7 +231,7 @@ def seg_n5(t0, t1):
     rng = np.random.default_rng(4)
     pinch = [((150, 520), T.PINK), ((930, 560), T.GOLD), ((140, 1350), (90, 190, 110)), ((940, 1300), T.AMBER)]
     puffs = rng.uniform(size=(len(pinch), 12, 3))
-    mg_dur, e_dur = 3.6, 2.4
+    mg_dur, e_dur = 2.6, 2.4
     clip = R.footage("E", 5.2, 2.4, e_dur, (1.04, 1.0), (0.5, 0.42), grade=CLEAN)
     dur = t1 - t0
     for i in range(int(round(dur * FPS))):
@@ -263,18 +243,18 @@ def seg_n5(t0, t1):
             sc = 1.1 - 0.1 * drop
             paste_center(f, shd, W / 2 + 8, 1110 + 20 + 40 * (1 - drop), drop, sc)
             paste_center(f, st, W / 2, 1110 - 70 * (1 - drop), drop, sc)
-            win = min(clamp((lt - 1.6) / 0.2), clamp((mg_dur - lt) / 0.3))
+            win = min(clamp((lt - 1.4) / 0.2), clamp((mg_dur - lt) / 0.3))
             for k, ((x, y), col) in enumerate(pinch):
                 if win <= 0:
                     break
                 for j in range(12):
                     u = puffs[k, j]
-                    ph = ((lt - 1.6) * 1.2 + u[0]) % 1
+                    ph = ((lt - 1.4) * 1.2 + u[0]) % 1
                     tx, ty = W / 2 + (x - W / 2) * 0.25 + (u[1] - 0.5) * 160, y + (1110 - y) * 0.5 + (u[2] - 0.5) * 160
                     px, py = x + (tx - x) * ph, y + (ty - y) * ph - 120 * math.sin(math.pi * ph)
                     paste_center(f, T.cblob(8 + int(5 * u[2]), col, 255), px, py, win * math.sin(math.pi * ph))
             TT.rise(f, title, W / 2, 230, lt, 0.1, 0.5, dy=0, scale_from=0.85)
-            for k, (ct, ce) in enumerate(((0.2, 1.6), (1.6, mg_dur))):
+            for k, (ct, ce) in enumerate(((0.15, 1.4), (1.4, mg_dur))):
                 if ct <= lt < ce:
                     TT.rise(f, chips[k], W / 2, 1790, lt, ct, 0.35, dy=0, scale_from=0.7)
             TT.dip(f, lt, mg_dur, fin=0.25, fout=0.15)
@@ -295,7 +275,7 @@ def seg_n6(t0, t1):
     a_dur = 2.2
     aw, ah, ay = 860, 1180, 330
     over = night_frame(aw, ah, ay, 13)
-    t_a = T.glow_text("Dhanteras se pehle", T.allura(110), T.CREAM, glow=(255, 220, 160), ga=90)
+    t_a = T.glow_text("Diwali se pehle", T.allura(110), T.CREAM, glow=(255, 220, 160), ga=90)
     t_b = T.glow_text("order karo!", T.yeseva(130), (T.GOLD_L, T.GOLD))
     dm = chip("DM to order", T.mont(48), fill=(120, 26, 96), pad=(50, 22))
     clip = R.footage("A", 2.4, 1.2, a_dur, (1.0, 1.0), grade=CLEAN)

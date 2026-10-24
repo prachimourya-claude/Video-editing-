@@ -51,24 +51,24 @@ Music: light festive instrumental (shehnai/sitar + soft percussion), ducked unde
 - Title: `A Unique Diwali Rangoli: Kalash Stencil 🪔 #shorts`
 - Description: the caption above, plus the music credit.
 
-## Reel v4 (night style, white stencil first)
+## Final reel (night style, creator's voiceover)
 
-`diwali01_reel_v4_night_music_only.mp4`: 30s, 1080x1920, music only, waiting for the voiceover.
-Same look as the approved teaser (night-blue sky, gold Mughal arches, sky lanterns, kandils, line fireworks, diyas);
-every clip plays inside a gold arch window (scaled to fit, blurred fill behind, feathered edges).
-The product sold is the plain white stencil, so the coloured rangoli appears only once, for ~2.4s at "Rangoli ready!".
-Render: `cd tools && python3 render_reel01_night.py <workdir> <workdir>/diwali01_video_only.mp4`, then `tools/mix_diwali01.sh <workdir>`.
+`diwali01_reel_final_voiceover.mp4`: 25.8s, 1080x1920, the creator's own voiceover + "Vadodora" ducked under it.
+Same look as the approved teaser; every clip plays inside a gold arch window. The product sold is the plain white
+stencil, so the coloured rangoli (E = VID-20261024-WA0013.mp4) appears once, for 2.4s at "perfect rangoli ready".
+The "Upar shubh kalash, neeche kamal" line was dropped by the creator, so its on-screen pointers are gone too.
 
-Rangoli footage: E = VID-20261024-WA0013.mp4 (finished rangoli; used once). D = VID-20261024-WA0012.mp4 is not used.
+Render: `cd tools && python3 render_reel01_night.py <workdir> <workdir>/diwali01_video_only.mp4`,
+then `tools/mix_reel01_vo.sh <workdir>` (needs `<workdir>/vo/raw.oga`, the voice note).
 
-| Time | Scene | Voiceover line |
+| Time | Scene | Voiceover (as recorded) |
 |---|---|---|
-| 0.0–3.2 | White stencil held up (A) in the arch, sky lanterns rising. "IS DIWALI" / "rangoli ho" / "kuch unique!" | 1 |
-| 3.2–7.2 | Grid of dull market stencils, "sab ek jaise!"; centre tile flips to our stencil in a small gold arch and grows. "Humara design" | 2 |
-| 7.2–13.2 | Printer clips in the arch. "Humne khud design kiya!", "Designed & 3D printed by Psone Labs", "Special: Dhanteras & Diwali" | 3 |
-| 13.2–19.2 | Hand-held stencil, slow-mo, whole stencil fitted inside a tall arch. "Kalash Rangoli Stencil", gold pointers "Upar: Shubh Kalash", "Neeche: Kamal" | 4 |
-| 19.2–25.2 | White stencil cut-out drops into the arch ("1 Stencil rakho"), pinches of rangoli powder fly in ("2 Rang bharo"); then 2.4s of the real finished rangoli (E) with "3 Rangoli ready!", "Perfect rangoli!", line fireworks | 5 |
-| 25.2–30.0 | White stencil (A) with "Dhanteras se pehle order karo!" + "DM to order", then dusk end card: lotus, Psone Labs, KALASH RANGOLI STENCIL, DM to order, diyas, शुभ दीपावली | 6 |
+| 0.0–3.2 | White stencil held up in the arch, sky lanterns rising. "IS DIWALI" / "rangoli ho" / "kuch unique!" | Is Diwali, aapki rangoli ho kuch unique! |
+| 3.2–7.2 | Grid of dull market stencils, "sab ek jaise!"; centre tile flips to our stencil. "Humara design" | Market mein stencils toh bahut hain... par sab ek jaise hain. |
+| 7.2–12.4 | Printer clips. "Humne khud design kiya!", "Designed & 3D printed by Psone Labs", "Special: Dhanteras & Diwali" | Isliye humne khud design kiya hai, special Diwali aur Dhanteras ke liye. |
+| 12.4–16.0 | Whole hand-held stencil, slow-mo, tall arch. "Kalash Rangoli Stencil" | Ye hai hamara Kalash stencil. |
+| 16.0–21.0 | White stencil drops into the arch ("1 Stencil rakho"), powder pinches ("2 Rang bharo"); 2.4s of the finished rangoli ("3 Rangoli ready!", "Perfect rangoli!") | Bas stencil rakho, rang bharo, aur perfect rangoli ready! |
+| 21.0–25.8 | White stencil, "Diwali se pehle order karo!", "DM to order"; end card: lotus, Psone Labs, KALASH RANGOLI STENCIL, DM to order, diyas, शुभ दीपावली | Diwali se pehle apna order karo, abhi DM karo! |
 
 Music: "Vadodora" by Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0. Put this in the caption / description:
 `Music: "Vadodora" Kevin MacLeod (incompetech.com) — Licensed under Creative Commons: By Attribution 4.0 — http://creativecommons.org/licenses/by/4.0/`
