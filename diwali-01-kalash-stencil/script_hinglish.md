@@ -69,3 +69,23 @@ The marigold toran, floating sparkles and a warm flash on each cut run across th
 
 Music: "Vadodora" by Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0. Put this in the caption / description:
 `Music: "Vadodora" Kevin MacLeod (incompetech.com) — Licensed under Creative Commons: By Attribution 4.0 — http://creativecommons.org/licenses/by/4.0/`
+
+## Teaser (post 1–2 days before the main reel)
+
+`teaser01_10s_music.mp4`: 10s, 1080x1920, music only. No product reveal and no handle.
+Render: `cd tools && python3 render_teaser01.py <workdir> <workdir>/teaser01_video_only.mp4`, then `tools/mix_diwali01.sh <workdir>`.
+
+| Time | Scene |
+|---|---|
+| 0.0–2.2 | Night sky, fireworks, toran drops, diyas light up. "Is Diwali..." / "kuch naya aa raha hai" |
+| 2.2–4.6 | Three tight, darkened close-ups of the printer and stencil edges. "Kuch khaas ban raha hai..." |
+| 4.6–7.9 | Stencil as a dark silhouette with a gold rim glow; one light sweep crosses it. "Guess karo... kya hai?" |
+| 7.9–10.0 | "Launching this Diwali", "Coming Soon", "Dhanteras se pehle", शुभ दीपावली, fade out |
+
+Caption:
+> Is Diwali kuch naya aa raha hai... 🪔✨ Guess karo kya hai? Comment karo 👇
+> Coming soon, Dhanteras se pehle!
+>
+> #ComingSoon #Diwali2026 #Dhanteras #DiwaliDecor #Rangoli #3DPrinting #SmallBusinessIndia
+
+Add the same "Vadodora" music credit as the main reel.
