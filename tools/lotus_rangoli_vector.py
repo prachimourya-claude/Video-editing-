@@ -147,6 +147,12 @@ def _build(loops, sx, sy):
     # Smooth hairline nicks where outlines touch at a tangent.
     # (also fills gold gaps under ~0.8 mm, which a 0.4 mm nozzle can't print anyway).
     ridge = (ridge.offset(0.4, rnd).offset(-0.4, rnd) ^ base).simplify(0.02)
+    # Fill gold pockets under 2 mm^2 (too small for powder; they also leave
+    # corner-to-corner pinches that make an STL non-manifold).
+    keep = [q for q in ridge.to_polygons()
+            if CrossSection([q], FillRule.NonZero).area() > 0
+            or CrossSection([q[::-1]], FillRule.NonZero).area() > 2.0]
+    ridge = CrossSection(keep, FillRule.NonZero).offset(0.05, rnd).offset(-0.05, rnd) ^ base
     base = base.simplify(0.02)
 
     # Floor 0.05 mm proud of the borders so no wall meets the edge at a single point.
