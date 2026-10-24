@@ -460,8 +460,7 @@ def bottom_scrim(base, h=800, alpha=170):
 
 # ---------------------------------------------------------------- stencil cut-out + colour fill
 def build_stencil():
-    """Cut the stencil out of clip A at 3.0s, rebuild the hand-covered left half by mirroring, and
-    prepare its rangoli colouring plus a per-pixel 'colour arrives' time map."""
+    """Cut the plain white stencil out of clip A at 3.0s; the hand-covered left half is rebuilt by mirroring."""
     src = f"{BASE}/stencil_A3.png"
     if not os.path.exists(src):
         subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", "3.0", "-i", f"{BASE}/src/A.mp4", "-frames:v", "1", src], check=True)
@@ -492,59 +491,30 @@ def build_stencil():
     m = cv2.morphologyEx(m, cv2.MORPH_OPEN, np.ones((5, 5), np.uint8))
     ysm, xsm = np.where(m)
     y0, y1, x0, x1 = ysm.min(), ysm.max() + 1, xsm.min(), xsm.max() + 1
-    im, m, L = im[y0:y1, x0:x1], m[y0:y1, x0:x1], im[y0:y1, x0:x1].mean(2)
-    cx -= x0
+    L, m = im[y0:y1, x0:x1].mean(2), m[y0:y1, x0:x1]
     # neutral white stencil (photo is a little blue)
     shade = L / np.percentile(L[m > 0], 90)
     white = np.clip(np.stack([shade * 248, shade * 244, shade * 238], 2), 0, 255)
-    # grooves = raised walls' shadows; keep a white rim on the outer border too
-    d = cv2.GaussianBlur(L, (0, 0), 5) - L
-    walls = (d > 4).astype(np.uint8)
-    rim = m - cv2.erode(m, np.ones((15, 15), np.uint8))
-    paintable = (m & (1 - cv2.dilate(walls, np.ones((3, 3), np.uint8))) & (1 - rim)).astype(np.float32)
-    paintable = cv2.GaussianBlur(paintable, (0, 0), 1.2)
-    # colour zones, in cropped-still rows (stencil ~800px tall)
-    hh = y1 - y0
-    yy, xx = np.mgrid[0:hh, 0:(x1 - x0)].astype(np.float32)
-    fy = yy / hh
-    dx = np.abs(xx - cx) / (x1 - x0)
-    col = np.zeros((hh, x1 - x0, 3), np.float32)
-    zone_t = np.zeros((hh, x1 - x0), np.float32)
-
-    def put(sel, c, t0):
-        col[sel] = c
-        zone_t[sel] = t0
-
-    put(np.ones_like(fy, bool), (200, 30, 60), 0.0)
-    put(fy >= 0.68, (228, 60, 130), 0.0)                       # lotus petals: rani pink
-    put((fy >= 0.68) & (dx < 0.12) & (fy < 0.9), (255, 150, 190), 0.15)  # centre petal: light pink
-    put((fy >= 0.92), (60, 150, 70), 0.3)                      # base: green
-    put((fy >= 0.52) & (fy < 0.68), (205, 30, 45), 0.55)       # pot body: kumkum red
-    put((fy >= 0.42) & (fy < 0.52), (255, 135, 20), 0.75)      # oval band: marigold
-    put((fy >= 0.34) & (fy < 0.42), (120, 20, 60), 0.9)        # dot band: maroon
-    put((fy >= 0.27) & (fy < 0.34), (250, 190, 40), 1.05)      # neck: haldi yellow
-    put((fy >= 0.08) & (fy < 0.27), (50, 150, 60), 1.2)        # mango leaves: green
-    put((fy >= 0.08) & (fy < 0.27) & (dx < 0.09), (255, 175, 40), 1.3)  # coconut / centre leaf
-    put(fy < 0.08, (255, 120, 20), 1.45)                       # tip: saffron
-    # powder grain
-    rng = np.random.default_rng(5)
-    grain = cv2.GaussianBlur(rng.normal(0, 1, fy.shape).astype(np.float32), (0, 0), 0.8)
-    colored = np.clip(col * (0.82 + 0.18 * shade[..., None]) * (1 + 0.09 * grain[..., None]), 0, 255)
-    # arrival time: each zone pours from its centre outwards, with a powdery noisy front
-    noise = cv2.GaussianBlur(rng.uniform(0, 1, fy.shape).astype(np.float32), (0, 0), 6)
-    noise = (noise - noise.min()) / (noise.max() - noise.min())
-    dist = np.hypot((xx - cx) / (x1 - x0), (fy - 0.5) * 0.3)
-    arrive = zone_t + 0.35 * dist / dist.max() + 0.25 * noise
-    return dict(white=white, colored=colored, paint=paintable, mask=m.astype(np.float32), arrive=arrive)
+    return Image.fromarray(np.dstack([white, m * 255]).astype(np.uint8), "RGBA")
 
 
-def stencil_frame(S, prog, scale):
-    """RGBA image of the stencil, coloured up to fill-time prog (seconds into the fill)."""
-    a = np.clip((prog - S["arrive"]) / 0.12, 0, 1) * S["paint"]
-    rgb = S["white"] * (1 - a[..., None]) + S["colored"] * a[..., None]
-    rgba = np.dstack([rgb, S["mask"] * 255]).astype(np.uint8)
-    im = Image.fromarray(rgba, "RGBA")
-    return im.resize((int(im.width * scale), int(im.height * scale)), Image.BILINEAR)
+def stencil_img(S, scale):
+    return S.resize((int(S.width * scale), int(S.height * scale)), Image.BILINEAR)
+
+
+def bowl_sprite(r, col, seed):
+    """Top-down brass bowl heaped with rangoli powder."""
+    s = 2 * r + 24
+    yy, xx = np.mgrid[0:s, 0:s].astype(np.float32)
+    d = np.hypot(xx - s / 2, yy - s / 2) / r
+    rng = np.random.default_rng(seed)
+    grain = cv2.GaussianBlur(rng.normal(0, 1, (s, s)).astype(np.float32), (0, 0), 0.7)
+    powder = np.array(col, np.float32) * (1.2 - 0.4 * d)[..., None] * (1 + 0.12 * grain)[..., None]
+    rim = np.array(GOLD, np.float32) * (0.75 + 0.35 * np.cos((xx - yy) / s * 3))[..., None]
+    rgb = np.where((d < 0.82)[..., None], powder, rim)
+    a = np.clip((1.0 - d) * r, 0, 1) * 255
+    im = Image.fromarray(np.dstack([np.clip(rgb, 0, 255), a]).astype(np.uint8), "RGBA")
+    return with_shadow(im, offset=(0, 8), blur=10, alpha=150)
 
 
 def floor_bg():
@@ -642,7 +612,7 @@ def seg_s1(t0, t1):
 def seg_s2(t0, t1, S):
     bg = night_bg(5)
     tile = generic_tile(270)
-    kal = stencil_frame(S, 9, 1.0)
+    kal = S
     gold_tile = Image.new("RGBA", (270, 270), (0, 0, 0, 0))
     ImageDraw.Draw(gold_tile).rounded_rectangle((0, 0, 269, 269), radius=26, fill=MAROON + (255,), outline=GOLD + (255,), width=6)
     k = kal.resize((int(kal.width * 230 / kal.height), 230), Image.BILINEAR)
@@ -744,33 +714,56 @@ def seg_s5(t0, t1, S):
     bg = floor_bg()
     title = plain_text("Bas 3 steps!", pop_sb(72))
     chips = [pill(s, pop_sb(44), fg=INK, bg=c) for s, c in
-             (("1  Rakho", CREAM), ("2  Rang bharo", SAFFRON), ("3  Rangoli ready!", (255, 170, 200)))]
-    tag = pill("Design preview", pop_sb(30), fg=CREAM, bg=(40, 10, 16), pad=(22, 10), alpha=200)
+             (("1  Stencil rakho", CREAM), ("2  Rangoli bharo", SAFFRON), ("3  Rangoli ready!", (255, 170, 200)))]
     ready = gold_text("Perfect rangoli!", vibes(140), stroke=2)
-    scale = 1040 / S["mask"].shape[0]
+    scale = 940 / S.height
+    st = stencil_img(S, scale)
+    halo = Image.new("RGBA", st.size, (255, 190, 90, 0))
+    halo.putalpha(st.getchannel("A"))
+    halo = halo.resize((st.width + 80, st.height + 80)).filter(ImageFilter.GaussianBlur(30))
+    bowls = [((105, 800), PINK), ((975, 800), SAFFRON), ((105, 1050), LEAF), ((975, 1050), MARIGOLD),
+             ((105, 1300), (205, 30, 45)), ((975, 1300), (140, 60, 190))]
+    bowl_im = [bowl_sprite(60, c, k) for k, (_, c) in enumerate(bowls)]
+    rng = np.random.default_rng(4)
+    puffs = rng.uniform(size=(len(bowls), 14, 3))
     bursts = [(300, 620, 3.25, (255, 200, 90), 21), (800, 560, 3.55, (255, 120, 170), 22)]
+    cy = 1030
     for i in range(int(round((t1 - t0) * FPS))):
         t = t0 + i / FPS
         lt = t - t0
         f = bg.copy()
         drop = ease_out((lt - 0.2) / 0.6)
-        fill_t = (lt - 1.3) * 1.45
-        st = stencil_frame(S, fill_t, scale * (1.12 - 0.12 * drop))
-        # shadow + stencil
+        lit = clamp((lt - 3.0) / 0.4)
+        if lit > 0:
+            paste_center(f, halo, W / 2, cy, 0.8 * lit * (0.85 + 0.15 * math.sin(lt * 5)))
+        sc = 1.12 - 0.12 * drop
         shd = Image.new("RGBA", st.size, (10, 2, 4, 0))
         shd.putalpha(st.getchannel("A").point(lambda v: v * 150 // 255))
         shd = shd.filter(ImageFilter.GaussianBlur(10 + 30 * (1 - drop)))
-        paste_center(f, shd, W / 2 + 10, 1070 + 18 + 40 * (1 - drop), drop)
-        paste_center(f, st, W / 2, 1070 - 60 * (1 - drop), drop)
-        lit = clamp((lt - 3.0) / 0.4)
-        for k, (x, y) in enumerate(((110, 520), (W - 110, 520), (110, 1560), (W - 110, 1560))):
-            draw_diya(f, x, y, 130, t, k + 3, 0.25 + 0.75 * lit)
+        paste_center(f, shd, W / 2 + 10, cy + 18 + 40 * (1 - drop), drop, sc)
+        paste_center(f, st, W / 2, cy - 60 * (1 - drop), drop, sc)
+        for k, (x, y) in enumerate(((110, 560), (W - 110, 560), (110, 1540), (W - 110, 1540))):
+            draw_diya(f, x, y, 120, t, k + 3, 0.25 + 0.75 * lit)
+        # step 2: powder bowls pop in, pinches of colour arc from each bowl into the stencil
+        for k, ((x, y), col) in enumerate(bowls):
+            pop(f, bowl_im[k], x, y, lt, 1.2 + 0.08 * k, 0.35)
+            win2 = min(clamp((lt - 1.5) / 0.2), clamp((3.0 - lt) / 0.3))
+            if win2 <= 0:
+                continue
+            side = 1 if x < W / 2 else -1
+            for j in range(14):
+                u = puffs[k, j]
+                ph = ((lt - 1.5) * 1.3 + u[0]) % 1
+                tx, ty = W / 2 - side * (60 + 200 * u[1]), y + (u[2] - 0.5) * 220
+                px = x + (tx - x) * ph
+                py = y + (ty - y) * ph - 160 * math.sin(math.pi * ph)
+                dot = blob(8 + int(5 * u[2]), col, 255)
+                paste_center(f, dot, px, py, win2 * math.sin(math.pi * ph))
         draw_fireworks(f, lt, bursts, 0.8)
         pop(f, title, W / 2, 330, lt, 0.1, 0.4, rise=20, from_scale=0.9, t_out=3.15)
         for k, ct in enumerate((0.3, 1.2, 3.0)):
             pop(f, chips[k], W / 2, 1700, lt, ct, 0.35, t_out=(1.2, 3.0, 99)[k])
         pop(f, ready, W / 2, 360, lt, 3.2, 0.5)
-        paste_center(f, tag, W - 170, 230, 0.9 * ease_out((lt - 1.2) / 0.3))
         overlay_common(f, t, toran_drop=0, sparkles=0.5 + 0.5 * lit)
         yield f
 
@@ -786,7 +779,7 @@ def seg_s6(t0, t1, S):
     sub = plain_text("Kalash Rangoli Stencil", pop_sb(54))
     shubh = gold_text("शुभ दीपावली", yatra(120), stroke=2)
     ig = pill("Instagram: Psone Labs", pop_sb(40), fg=CREAM, bg=MAROON, border=GOLD + (255,))
-    kal = stencil_frame(S, 9, 380 / S["mask"].shape[0])
+    kal = stencil_img(S, 380 / S.height)
     bursts = [(220, 380, a_dur + 0.4, (255, 190, 80), 31), (860, 330, a_dur + 0.9, (255, 110, 160), 32),
               (540, 250, a_dur + 1.5, (140, 220, 255), 33)]
     clip = footage("A", 3.0, 3.0, a_dur, (1.0, 1.08), (0.55, 0.42))

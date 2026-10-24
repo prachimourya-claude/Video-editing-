@@ -12,7 +12,7 @@ Product: 3D-printed Kalash + lotus rangoli stencil, designed in-house for Dhante
 | 3–8s | Clip C 0:00–0:05, printer head over finished stencil on the bed | "Market ke stencils = same old designs" | Market mein stencils toh bahut hain… par sab ek jaise. |
 | 8–14s | Clip C 0:05–0:11 → match cut to Clip B 0:09–0:12 (lotus pieces printing) | "Designed & 3D printed by Psone Labs" | Isliye humne khud design kiya — special Dhanteras aur Diwali ke liye. |
 | 14–20s | Clip B 0:00–0:04 slow-mo, labels pop on the kalash and the lotus | "Upar: shubh kalash" · "Neeche: kamal" | Ye hai hamara Kalash stencil. Upar shubh kalash, aur neeche kamal. |
-| 20–25s | Animated colour fill on a still of the stencil (Clip A 0:03), labelled "Design preview" | "1 Rakho · 2 Rang bharo · 3 Rangoli ready" | Bas stencil rakho, rang bharo… aur perfect rangoli ready! |
+| 20–25s | Plain stencil (cut out of Clip A 0:03) with animated rangoli-powder bowls | "1 Stencil rakho · 2 Rangoli bharo · 3 Rangoli ready!" | Bas stencil rakho, rang bharo… aur perfect rangoli ready! |
 | 25–30s | Clip A 0:04–0:07, stencil in front of the curtain, warm glow + diya sparkles | "Order now · DM / link in bio" | Dhanteras se pehle apna order karo — abhi DM karo! |
 
 Voiceover in Devanagari (for TTS / your own voice): `voiceover_devanagari.txt`.
@@ -23,7 +23,7 @@ Voiceover in Devanagari (for TTS / your own voice): `voiceover_devanagari.txt`.
 2. **Problem (3–8s)**: printer shot, a bit desaturated. Strike-through animation on the text "same old designs".
 3. **Reveal (8–14s)**: colour comes back with a soft flash at the voice line "khud design kiya". Bambu printer move → match cut on the lotus shapes being printed. Small badge: "Made in-house · 3D printed".
 4. **Product hero (14–20s)**: 0.6× slow-mo on the hand-held turn. Thin gold arrows draw onto the kalash ("Upar: shubh kalash") and the lotus ("Neeche: kamal"). A gentle glow on the stencil edges.
-5. **How to use (20–25s)**: no real fill footage, so this is animated. A clean still of the stencil from Clip A is cut out onto a floor-tile background, then each section fills with rangoli colour in turn (kalash in marigold and maroon, lotus in pink and green, gold dots on the rim), with a powder-grain texture. Number chips 1·2·3 pop in turn. A small "Design preview" tag stays in the corner so it isn't mistaken for a real rangoli photo. Hold the finished colour version for 1.5s.
+5. **How to use (20–25s)**: the stencil stays plain white. It drops onto a red-oxide floor; six brass bowls of rangoli powder (pink, yellow, green, orange, red, purple) pop in around it and pinches of powder arc into the stencil to show "rangoli bharo". On "ready" the stencil glows, the diyas light up and two fireworks burst.
 6. **CTA (25–30s)**: curtain shot, warm grade, sparkles falling, brand handle + "DM to order" pill. End card holds 1s so the loop back to the hook feels clean.
 
 Visual style: festive warm grade (marigold, maroon, gold), cream paper captions to match the existing reels, Devanagari accents only for "शुभ दीपावली".
@@ -51,18 +51,18 @@ Music: light festive instrumental (shehnai/sitar + soft percussion), ducked unde
 - Title: `A Unique Diwali Rangoli: Kalash Stencil 🪔 #shorts`
 - Description: the caption above, plus the music credit.
 
-## Draft v1 (motion-graphics cut)
+## Draft v2 (motion-graphics cut, plain stencil)
 
-`diwali01_draft_v1_music_only.mp4`: 30s, 1080x1920, music only, waiting for the voiceover.
+`diwali01_draft_v2_music_only.mp4`: 30s, 1080x1920, music only, waiting for the voiceover.
 Render: `python3 tools/render_diwali01.py <workdir> <workdir>/diwali01_video_only.mp4`, then `tools/mix_diwali01.sh <workdir>`.
 
 | Time | Scene | Voiceover line |
 |---|---|---|
 | 0.0–3.2 | Night sky, fireworks, marigold toran drops in, 5 diyas light up. "Diwali aa rahi hai!" / "Is baar rangoli ho kuch UNIQUE" | 1 |
-| 3.2–7.2 | 3x3 grid of identical grey market stencils, "sab ek jaise!"; centre tile flips to our coloured kalash and zooms in | 2 |
+| 3.2–7.2 | 3x3 grid of identical grey market stencils, "sab ek jaise!"; centre tile flips to our (plain white) kalash and zooms in | 2 |
 | 7.2–13.2 | Printer clip + lotus pieces printing. "Humne khud design kiya!", "Designed & 3D printed by Psone Labs", "Special: Dhanteras & Diwali" | 3 |
 | 13.2–19.2 | Hand-held stencil, slow-mo. "Kalash Rangoli Stencil", pointers "Upar: Shubh Kalash" and "Neeche: Kamal" | 4 |
-| 19.2–25.2 | Stencil drops on a red-oxide floor, fills with rangoli colours zone by zone, diyas + fireworks. Steps 1-2-3, "Perfect rangoli!", "Design preview" tag | 5 |
+| 19.2–25.2 | Plain stencil drops on a red-oxide floor; six bowls of rangoli powder pop in and pinches of colour arc into the stencil; then it glows, diyas light up, fireworks. Steps "1 Stencil rakho · 2 Rangoli bharo · 3 Rangoli ready!", "Perfect rangoli!" | 5 |
 | 25.2–30.0 | Stencil clip, "Dhanteras se pehle order karo!", "DM to order", then end card: Psone Labs, शुभ दीपावली | 6 |
 
 The marigold toran, floating sparkles and a warm flash on each cut run across the whole reel.
