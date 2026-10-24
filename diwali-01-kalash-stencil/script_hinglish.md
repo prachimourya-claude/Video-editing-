@@ -70,17 +70,21 @@ The marigold toran, floating sparkles and a warm flash on each cut run across th
 Music: "Vadodora" by Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0. Put this in the caption / description:
 `Music: "Vadodora" Kevin MacLeod (incompetech.com) — Licensed under Creative Commons: By Attribution 4.0 — http://creativecommons.org/licenses/by/4.0/`
 
-## Teaser (post 1–2 days before the main reel)
+## Teaser v2 (post 1–2 days before the main reel)
 
-`teaser01_10s_music.mp4`: 10s, 1080x1920, music only. No product reveal and no handle.
+`teaser01_v2_10s_music.mp4`: 10s, 1080x1920, music only. No product reveal and no handle.
+Style matched to the client's references in `style_frames_teaser/` (night-blue sky to purple/pink, gold Mughal arches,
+sky lanterns, kandils, line fireworks, glowing diyas). Stills: `tools/style_frames_teaser01.py`.
 Render: `cd tools && python3 render_teaser01.py <workdir> <workdir>/teaser01_video_only.mp4`, then `tools/mix_diwali01.sh <workdir>`.
 
 | Time | Scene |
 |---|---|
-| 0.0–2.2 | Night sky, fireworks, toran drops, diyas light up. "Is Diwali..." / "kuch naya aa raha hai" |
-| 2.2–4.6 | Three tight, darkened close-ups of the printer and stencil edges. "Kuch khaas ban raha hai..." |
-| 4.6–7.9 | Stencil as a dark silhouette with a gold rim glow; one light sweep crosses it. "Guess karo... kya hai?" |
-| 7.9–10.0 | "Launching this Diwali", "Coming Soon", "Dhanteras se pehle", शुभ दीपावली, fade out |
+| 0.0–2.2 | Night-blue sky, sky lanterns drifting up, stars twinkling, rooftops lined with flickering diyas. "IS DIWALI" / "kuch naya" / "aa raha hai..." written on |
+| 2.2–4.6 | Gold onion-dome arch; inside, a tight, dark purple close-up of the printed stencil's detail. Kandils sway. "KUCH KHAAS" / "ban raha hai..." |
+| 4.6–7.9 | String lights, kandils, "Guess karo... kya hai?". Purple-to-pink arch with drifting bokeh and gold/pink line fireworks; the stencil rises in as a dark shape with a glowing gold edge, one light sweep crosses it |
+| 7.9–10.0 | Dusk sky, magenta arch with gold border: "LAUNCHING THIS DIWALI", "Coming Soon", a gold lotus opens, "DHANTERAS SE PEHLE", three flickering diyas, शुभ दीपावली, fade out |
+
+Scenes join with soft dips to night-navy (no flashes).
 
 Caption:
 > Is Diwali kuch naya aa raha hai... 🪔✨ Guess karo kya hai? Comment karo 👇

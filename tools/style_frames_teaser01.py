@@ -13,7 +13,6 @@ import render_diwali01 as R
 from render_diwali01 import W, H, paste_center, text_mask, blob
 
 BASE, OUTDIR = sys.argv[1], sys.argv[2]
-os.makedirs(OUTDIR, exist_ok=True)
 F = BASE + "/fonts/"
 yeseva = lambda s: ImageFont.truetype(F + "yeseva.ttf", s)
 mont = lambda s: ImageFont.truetype(F + "montserrat_sb.ttf", s)
@@ -66,7 +65,7 @@ def bokeh(base, n, seed, cols, ymin=0, ymax=H):
 def sky_lantern(h, blur=0):
     """Paper sky lantern: warm trapezoid, brightest at the open bottom, with a halo."""
     w = int(h * 0.75)
-    im = Image.new("RGBA", (w * 3, h * 3), (0, 0, 0, 0))
+    im = Image.new("RGBA", (int(h * 3), int(h * 3)), (0, 0, 0, 0))
     paste_center(im, blob(int(h * 0.7), AMBER, 150), im.width / 2, im.height / 2)
     body = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     m = Image.new("L", (w, h), 0)
@@ -110,7 +109,7 @@ def kandil(h):
     for k in range(9):
         x = cx - w * 0.2 + w * 0.4 * k / 8
         d.line((x, b, x + (k - 4) * 1.5, b + h * 0.55), fill=(170, 60, 70, 255), width=5)
-    out = Image.new("RGBA", (im.width * 2, im.height * 2), (0, 0, 0, 0))
+    out = Image.new("RGBA", (max(im.width * 2, int(h * 2)), im.height * 2), (0, 0, 0, 0))
     paste_center(out, blob(int(h * 0.45), AMBER, 110), out.width / 2, out.height / 2 - h * 0.25)
     paste_center(out, im, out.width / 2, out.height / 2)
     return out
@@ -218,10 +217,20 @@ def glow_text(t, font, fill=GOLD, glow=AMBER, ga=170, track=0):
     return out
 
 
-def diya_glow(base, x, y, w):
-    """Deep-plum diya with gold bands and a big warm flame glow (ref 3)."""
+_BLOBS = {}
+
+
+def cblob(r, color, strength):
+    key = (r, color, strength)
+    if key not in _BLOBS:
+        _BLOBS[key] = blob(r, color, strength)
+    return _BLOBS[key]
+
+
+def diya_glow(base, x, y, w, fl=1.0):
+    """Deep-plum diya with gold bands and a big warm flame glow (ref 3); fl scales the flame for flicker."""
     h = int(w * 0.45)
-    paste_center(base, blob(int(w * 0.75), AMBER, 200), x, y - w * 0.2)
+    paste_center(base, cblob(int(w * 0.75), AMBER, 200), x, y - w * 0.2, min(1, 0.75 + 0.5 * (fl - 0.9)))
     im = Image.new("RGBA", (w + 20, h + 30), (0, 0, 0, 0))
     d = ImageDraw.Draw(im)
     d.chord((10, 10 - h, 10 + w, 10 + h), 0, 180, fill=(88, 24, 70, 255))
@@ -230,8 +239,11 @@ def diya_glow(base, x, y, w):
     d.ellipse((10, 10 - h * 0.18, 10 + w, 10 + h * 0.18), fill=(255, 170, 70, 255))
     d.ellipse((10 + w * 0.06, 10 - h * 0.12, 10 + w * 0.94, 10 + h * 0.12), fill=(255, 214, 130, 255))
     paste_center(base, im, x, y + h * 0.3)
-    fl = R.flame_sprite(int(w * 0.6))
-    paste_center(base, fl, x, y - fl.height / 2 + 8)
+    if ("flame", w) not in _BLOBS:
+        _BLOBS[("flame", w)] = R.flame_sprite(int(w * 0.6))
+    fs = _BLOBS[("flame", w)]
+    fs = fs.resize((fs.width, max(2, int(fs.height * fl))), Image.BILINEAR)
+    paste_center(base, fs, x, y - fs.height / 2 + 8)
 
 
 def silhouette(S, height):
@@ -356,6 +368,7 @@ def frame_4():
 
 
 if __name__ == "__main__":
+    os.makedirs(OUTDIR, exist_ok=True)
     S = R.build_stencil()
     frames = [("teaser_1_opener", frame_1), ("teaser_2_glimpse", frame_2),
               ("teaser_3_guess", lambda: frame_3(S)), ("teaser_4_coming_soon", frame_4)]
