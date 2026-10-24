@@ -128,11 +128,14 @@ def build():
               if CrossSection([poly], FillRule.NonZero).area() > 0]
     base = CrossSection(outers, FillRule.NonZero)
     # Smooth hairline nicks where outlines touch at a tangent.
-    ridge = ridge.offset(0.3, rnd).offset(-0.3, rnd) ^ base
+    # (also fills gold gaps under ~0.8 mm, which a 0.4 mm nozzle can't print anyway).
+    ridge = (ridge.offset(0.4, rnd).offset(-0.4, rnd) ^ base).simplify(0.02)
+    base = base.simplify(0.02)
 
-    model = Manifold.extrude(base, BASE_T)
+    # Floor 0.05 mm proud of the borders so no wall meets the edge at a single point.
+    model = Manifold.extrude(base.offset(0.05, rnd), BASE_T)
     model += Manifold.extrude(ridge, RIDGE_H + 0.3).translate((0, 0, BASE_T - 0.3))
-    model = model.simplify(0.01)
+    model = model.simplify(0.03)
     bb = model.bounding_box()
     model = model.translate((-(bb[0] + bb[3]) / 2, -(bb[1] + bb[4]) / 2, -bb[2]))
     return model, loops
