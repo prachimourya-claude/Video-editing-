@@ -21,6 +21,7 @@ import lotus_rangoli_board as render   # preview + STL helpers
 
 # --- Parameters (mm) ---------------------------------------------------------
 WIDTH = 150.0          # overall width
+HEIGHT = None          # overall height; None keeps the natural proportions (~0.66 x width)
 BASE_T = 2.2           # solid floor thickness
 RIDGE_H = 1.8          # ridge height above the floor
 RIDGE_W = 2.2          # border width
@@ -98,16 +99,32 @@ def petal_outline(name, side):
     return loop
 
 
-def to_mm(loop, s):
-    return [((x - CX) * s, -y * s) for x, y in loop]
+def to_mm(loop, sx, sy):
+    return [((x - CX) * sx, -y * sy) for x, y in loop]
 
 
 def build():
+    """Build at WIDTH x HEIGHT: scale the petal curves (not the border width) to fit."""
     loops = [petal_outline(n, sd) for n, sd in ORDER]
-    allx = np.concatenate([l[:, 0] for l in loops])
-    s = WIDTH / (allx.max() - allx.min() + RIDGE_W / (WIDTH / 1430))   # include stroke width
-    petals = [CrossSection([to_mm(l, s)], FillRule.NonZero) for l in loops]
-    petals = [p if p.area() > 0 else CrossSection([to_mm(l[::-1], s)], FillRule.NonZero)
+    pts = np.concatenate(loops)
+    span = pts.max(0) - pts.min(0)
+    sx = sy = WIDTH / span[0]
+    if HEIGHT is not None:
+        sy = HEIGHT / span[1]
+    for _ in range(2):          # second pass corrects for the border sticking out past the curves
+        model = _build(loops, sx, sy)
+        bb = model.bounding_box()
+        sx *= (WIDTH - (bb[3] - bb[0] - span[0] * sx)) / (span[0] * sx)
+        if HEIGHT is not None:
+            sy *= (HEIGHT - (bb[4] - bb[1] - span[1] * sy)) / (span[1] * sy)
+        else:
+            sy = sx
+    return _build(loops, sx, sy), loops
+
+
+def _build(loops, sx, sy):
+    petals = [CrossSection([to_mm(l, sx, sy)], FillRule.NonZero) for l in loops]
+    petals = [p if p.area() > 0 else CrossSection([to_mm(l[::-1], sx, sy)], FillRule.NonZero)
               for p, l in zip(petals, loops)]
 
     hw = RIDGE_W / 2
@@ -137,8 +154,7 @@ def build():
     model += Manifold.extrude(ridge, RIDGE_H + 0.3).translate((0, 0, BASE_T - 0.3))
     model = model.simplify(0.03)
     bb = model.bounding_box()
-    model = model.translate((-(bb[0] + bb[3]) / 2, -(bb[1] + bb[4]) / 2, -bb[2]))
-    return model, loops
+    return model.translate((-(bb[0] + bb[3]) / 2, -(bb[1] + bb[4]) / 2, -bb[2]))
 
 
 def overlay(loops, ref, path):
@@ -152,6 +168,10 @@ def overlay(loops, ref, path):
 if __name__ == "__main__":
     out = Path(sys.argv[1])
     out.mkdir(parents=True, exist_ok=True)
+    opt = lambda name, default: (float(sys.argv[sys.argv.index(name) + 1])
+                                 if name in sys.argv else default)
+    WIDTH, HEIGHT = opt("--width", WIDTH), opt("--height", HEIGHT)
+    BASE_T, RIDGE_H = opt("--floor", BASE_T), opt("--ridge-h", RIDGE_H)
     render.BASE_T, render.RIDGE_H = BASE_T, RIDGE_H
     model, loops = build()
     bb = model.bounding_box()
