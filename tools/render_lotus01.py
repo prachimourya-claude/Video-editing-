@@ -103,38 +103,29 @@ class Ring:
         paste_center(f, out, RC[0], RC[1], alpha, scale)
 
 
+def shadowed(im):
+    """Text over the real footage: a soft dark shadow instead of any coloured shade on the video."""
+    return R.with_shadow(im, offset=(0, 4), blur=10, alpha=200, color=(20, 8, 12))
+
+
 def dip(f, lt, dur, fin=0.25, fout=0.2):
     a = max(clamp(1 - lt / fin), clamp(1 - (dur - lt) / fout))
     if a > 0:
         f.alpha_composite(Image.new("RGBA", (W, H), (70, 10, 40, int(255 * ease_io(a)))))
 
 
-def scrim(top=True, h=700, alpha=190):
-    g = np.linspace(1, 0, h) ** 1.4 * alpha
-    if not top:
-        g = g[::-1]
-    im = Image.new("RGBA", (W, h), (70, 10, 40, 0))
-    im.putalpha(Image.fromarray(np.broadcast_to(g[:, None], (h, W)).astype(np.uint8)))
-    return im
-
-
 def footage_scene(t0, t1, seed, shots, texts, ring_in=False, full=False):
     """shots: list of (clip, ss, src_dur, out_dur, src_point, s); texts: callable(f, lt) drawing the text.
-    full=True plays the clip full screen as filmed (hand and all, slow push-in on src_point) with soft rose
-    scrims for the text; otherwise it sits in the gold ring of lotus petals over the rose backdrop."""
+    full=True plays the clip full screen exactly as filmed (hand and all, gentle push-in on src_point), with no tint,
+    no frame and straight cuts; otherwise it sits in the gold ring of lotus petals over the rose backdrop."""
     dur = t1 - t0
     frames = []
     if full:
-        top, bot = scrim(True), scrim(False, 600, 170)
         for name, ss, sd, od, src, s in shots:
-            frames += [(fr, src, s) for fr in R.footage(name, ss, sd, od, (1.0, 1.06), (src[0] / W, src[1] / H), grade=CLEAN)]
+            frames += [(fr, src, s) for fr in R.footage(name, ss, sd, od, (1.0, 1.04), (src[0] / W, src[1] / H), grade=CLEAN)]
         for i, (fr, src, s) in enumerate(frames[:int(round(dur * FPS))]):
-            lt = i / FPS
             f = fr
-            f.alpha_composite(top)
-            f.alpha_composite(bot, (0, H - bot.height))
-            texts(f, lt)
-            dip(f, lt, dur)
+            texts(f, i / FPS)
             yield f
         return
     bd, rg = Backdrop(seed), Ring()
@@ -162,8 +153,8 @@ def seg_l1(t0, t1):
 
 
 def seg_l2(t0, t1):
-    a = T.glow_text("Is baar humne banaya...", T.allura(110), T.CREAM, glow=(255, 200, 220), ga=90)
-    b = T.glow_text("LOTUS STENCIL", T.yeseva(130), (T.GOLD_L, T.GOLD))
+    a = shadowed(T.glow_text("Is baar humne banaya...", T.allura(110), T.CREAM, glow=(255, 200, 220), ga=90))
+    b = shadowed(T.glow_text("LOTUS STENCIL", T.yeseva(130), (T.GOLD_L, T.GOLD)))
     c = R.pill("Designed & 3D printed by us", T.mont(36), fg=O.ROSE_D, bg=T.GOLD_L, pad=(40, 18))
 
     def texts(f, lt):
@@ -182,7 +173,7 @@ def seg_l3(t0, t1):
 
 
 def seg_l4(t0, t1):
-    a = T.glow_text("LOTUS RANGOLI STENCIL", T.mont(40), T.CREAM, ga=0, track=10)
+    a = shadowed(T.glow_text("LOTUS RANGOLI STENCIL", T.mont(40), T.CREAM, ga=0, track=10))
 
     def texts(f, lt):
         TT.rise(f, a, W / 2, 1760, lt, 0.3, 0.6)
@@ -192,7 +183,7 @@ def seg_l4(t0, t1):
 
 
 def seg_l5(t0, t1):
-    a = T.glow_text("Diwali special", T.allura(120), T.GOLD_L, glow=(255, 200, 120), ga=120)
+    a = shadowed(T.glow_text("Diwali special", T.allura(120), T.GOLD_L, glow=(255, 200, 120), ga=120))
 
     def texts(f, lt):
         TT.wipe(f, a, W / 2, 330, ease_io((lt - 0.2) / 0.8))
@@ -200,8 +191,8 @@ def seg_l5(t0, t1):
 
 
 def seg_l6(t0, t1):
-    a = T.glow_text("Just fill in the colours", T.allura(110), T.CREAM, glow=(255, 200, 220), ga=90)
-    b = T.glow_text("& you're good to go!", T.yeseva(96), (T.GOLD_L, T.GOLD))
+    a = shadowed(T.glow_text("Just fill in the colours", T.allura(110), T.CREAM, glow=(255, 200, 220), ga=90))
+    b = shadowed(T.glow_text("& you're good to go!", T.yeseva(96), (T.GOLD_L, T.GOLD)))
 
     def texts(f, lt):
         TT.wipe(f, a, W / 2, 260, ease_io((lt - 0.1) / 0.9))

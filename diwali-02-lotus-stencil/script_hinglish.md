@@ -3,9 +3,9 @@
 ## Chosen: Option B (Rose & Gold) + the client's own script
 
 Vertical 9:16, 24.5s (kept long on purpose: the three voice lines sit where they fit, the rest is visuals + text),
-voice-only, music added in the Instagram app. Draft: `lotus_reel_draft_v2_silent.mp4` (silent, waiting for the voice note).
-To keep it real, the hand shots and the printer bed play full screen as filmed (soft rose shade top/bottom for text);
-only the opening and the second printer shot use the gold ring of lotus petals.
+voice-only, music added in the Instagram app. Draft: `lotus_reel_draft_v3_silent.mp4` (silent, waiting for the voice note).
+To keep it real, the hand shots and the printer bed play full screen exactly as filmed: no tint, no frame, straight cuts,
+text with only a soft dark shadow. Only the opening, the second printer shot and the end card use the Rose & Gold design.
 Render: `cd tools && python3 render_lotus01.py <workdir> <workdir>/lotus_video_only.mp4`. Stills: `style_frames_b/`.
 
 | Time | Voiceover (client's words) | Shot | On screen |
