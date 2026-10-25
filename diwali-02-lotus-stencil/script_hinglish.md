@@ -2,21 +2,22 @@
 
 ## Chosen: Option B (Rose & Gold) + the client's own script
 
-Vertical 9:16, ~14s, voice-only (music added in the Instagram app). Stills: `style_frames_b/`
-(`cd tools && python3 style_frames_lotus_b.py <workdir> <outdir>`).
+Vertical 9:16, 24.5s (kept long on purpose: the three voice lines sit where they fit, the rest is visuals + text),
+voice-only, music added in the Instagram app. Draft: `lotus_reel_draft_v1_silent.mp4` (silent, waiting for the voice note).
+Render: `cd tools && python3 render_lotus01.py <workdir> <workdir>/lotus_video_only.mp4`. Stills: `style_frames_b/`.
 
-| Time | Voiceover (client's words) | Shot (inside the gold ring of lotus petals) | On screen |
+| Time | Voiceover (client's words) | Shot (inside the gold ring of turning lotus petals) | On screen |
 |---|---|---|---|
-| 0–2.5 | New day, new product! | White lotus held up (WA0004 12.5s) | "New day," / "NEW PRODUCT!" |
-| 2.5–6 | Toh is baar humne banaya hai Lotus Stencil. | Printed lotuses on the bed (WA0004 0–4s) | "Is baar humne banaya..." / "LOTUS STENCIL" / "Designed & 3D printed by us" |
-| 6–8.5 | (no voice) | White lotus in slow motion (WA0004 10.5–12s) | "LOTUS RANGOLI STENCIL" |
-| 8.5–12 | Just fill in the colours and you're good to go! | Filling, then finished rangoli (WA0005 1–4s, 6–8s; the only coloured footage) | "Just fill in the colours" / "& you're good to go!" |
-| 12–14 | (no voice) | End card | lotus icon, "Order now!", LOTUS RANGOLI STENCIL, "DM to order", diyas, शुभ दीपावली |
+| 0–3 | New day, new product! | White lotus held up (WA0004 12–13.8s, slow) | "New day," / "NEW PRODUCT!" |
+| 3–7 | Toh is baar humne banaya hai lotus stencil. | Printed lotuses on the bed (WA0004 0–4s) | "Is baar humne banaya..." / "LOTUS STENCIL" / "Designed & 3D printed by us" |
+| 7–10.5 | — | Bed, another angle (WA0003 0–3.5s) | "Fresh from our 3D printer" |
+| 10.5–14 | — | White lotus, slow motion (WA0004 10.5–12.5s) | "LOTUS RANGOLI STENCIL", gold sparkle bursts |
+| 14–16.5 | — | Petal close-up (WA0003 5.8–7.4s) | "Diwali special" |
+| 16.5–20.5 | Just fill in the colours and you're good to go! | Hand filling (WA0005 0.5–2.5s), then finished rangoli (WA0005 6–8s); only coloured footage | "Just fill in the colours" / "& you're good to go!" |
+| 20.5–24.5 | — | End card | lotus icon, "Order now!", LOTUS RANGOLI STENCIL, "DM to order", diyas, शुभ दीपावली |
 
-Motion: petals around the ring slowly turn, pink bokeh and petals drift, gold mandala corners shimmer, text writes on / glows in,
-soft dissolves between shots, diya flames flicker on the end card.
-
-Devanagari for recording: `voiceover_devanagari.txt`.
+Motion: petals around the ring turn slowly, pink bokeh and petals drift up, text writes on / glows in, soft dips to deep rose
+between shots, diya flames flicker on the end card.
 
 ---
 
