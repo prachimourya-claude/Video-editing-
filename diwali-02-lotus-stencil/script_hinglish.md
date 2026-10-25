@@ -65,3 +65,13 @@ Style frames: `style_frames/` (hook, printer, steps, end card). Regenerate with
 >
 > #Diwali2026 #Dhanteras #RangoliStencil #LotusRangoli #KamalRangoli #EasyRangoli #DiwaliDecor #RangoliDesign
 > #DiwaliVibes #3DPrinting #MadeInIndia #SmallBusinessIndia #NewLaunch #ReelsIndia
+
+## Style options (client asked for something other than the night-blue arch look)
+
+`style_options/` holds a hook and an end card for each; regenerate with `cd tools && python3 style_options_lotus01.py <workdir> <outdir>`.
+
+| Option | Look |
+|---|---|
+| A — Brand Beige | PSOne Labs' own palette: warm beige, terracotta + olive, botanical line art, rounded photo card with a white border; "Mumbai, India · DM to Order" bar like the brand's posts |
+| B — Rose & Gold | Blush to deep rose, gold mandala corners, pink bokeh and floating petals; footage in a gold ring framed by lotus petals; glowing diyas |
+| C — Mint Pop | Mint background with peach/pink blobs and a faint lotus pattern; footage as a tilted polaroid with washi tape, "NEW!" starburst, sticker-style pills, handwritten notes |
