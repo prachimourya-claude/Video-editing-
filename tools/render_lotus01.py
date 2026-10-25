@@ -196,7 +196,7 @@ def seg_l6(t0, t1):
 
     def texts(f, lt):
         TT.wipe(f, a, W / 2, 260, ease_io((lt - 0.1) / 0.9))
-        TT.rise(f, b, W / 2, 400, lt, 2.0, 0.6, dy=0, scale_from=0.7)
+        TT.rise(f, b, W / 2, 400, lt, 1.4, 0.6, dy=0, scale_from=0.7)
         TT.burst(f, 180, 700, 70, T.GOLD, lt, 2.2)
         TT.burst(f, 900, 640, 60, O.PINK, lt, 2.6)
     return footage_scene(t0, t1, 18, [("L5", 0.5, 2.0, 2.0, (550, 870), 1.0), ("L5", 6.0, 2.0, 2.0, (550, 750), 1.0)], texts, full=True)

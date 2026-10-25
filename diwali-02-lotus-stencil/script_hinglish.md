@@ -3,7 +3,9 @@
 ## Chosen: Option B (Rose & Gold) + the client's own script
 
 Vertical 9:16, 24.5s (kept long on purpose: the three voice lines sit where they fit, the rest is visuals + text),
-voice-only, music added in the Instagram app. Draft: `lotus_reel_draft_v3_silent.mp4` (silent, waiting for the voice note).
+voice-only, music added in the Instagram app. Final: `lotus_reel_final_voice_only.mp4` (creator's voice note AUD-20261025-WA0006; music added on Instagram).
+Mix: `tools/mix_lotus01_vo.sh <workdir>` (needs `<workdir>/vo/raw.mp3`). Voice lines land at 0.3s, 3.3s, 16.7s and 21.0s;
+the fourth line, "Order now for your Diwali", plays over the "Order now!" end card.
 To keep it real, the hand shots and the printer bed play full screen exactly as filmed: no tint, no frame, straight cuts,
 text with only a soft dark shadow. Only the opening, the second printer shot and the end card use the Rose & Gold design.
 Render: `cd tools && python3 render_lotus01.py <workdir> <workdir>/lotus_video_only.mp4`. Stills: `style_frames_b/`.
@@ -16,7 +18,7 @@ Render: `cd tools && python3 render_lotus01.py <workdir> <workdir>/lotus_video_o
 | 10.5–14 | — | Full screen: hand holding the white lotus, slow motion (WA0004 10.5–12.5s) | "LOTUS RANGOLI STENCIL", gold sparkle bursts |
 | 14–16.5 | — | Full screen: hand-held petal close-up (WA0003 5.8–8s) | "Diwali special" |
 | 16.5–20.5 | Just fill in the colours and you're good to go! | Full screen: hand filling (WA0005 0.5–2.5s), then finished rangoli (WA0005 6–8s); only coloured footage | "Just fill in the colours" / "& you're good to go!" |
-| 20.5–24.5 | — | End card | lotus icon, "Order now!", LOTUS RANGOLI STENCIL, "DM to order", diyas, शुभ दीपावली |
+| 20.5–24.5 | Order now for your Diwali! | End card | lotus icon, "Order now!", LOTUS RANGOLI STENCIL, "DM to order", diyas, शुभ दीपावली |
 
 Motion: petals around the ring turn slowly, pink bokeh and petals drift up, text writes on / glows in, soft dips to deep rose
 between shots, diya flames flicker on the end card.
