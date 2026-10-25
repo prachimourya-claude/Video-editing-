@@ -1,4 +1,4 @@
-# Diwali 02 — Lotus Rangoli Stencil (Psone Labs)
+# Diwali 02 — Lotus Rangoli Stencil (PSOne Labs)
 
 Vertical 9:16, ~26s, for Instagram Reels (also YouTube Shorts / Facebook Reels). Posted 25 Oct 2026, the day after the Kalash reel,
 so it opens with "New day, new product!". Same night style as the Kalash reel and teaser (night-blue sky to purple/pink,
@@ -12,7 +12,7 @@ The creator records the voiceover; the reel goes out voice-only and music is add
 |---|---|---|---|
 | 1 | 0.0–2.6 | New day, new product! | "NEW DAY," / "new product!" / chip "Lotus Rangoli Stencil" |
 | 2 | 2.6–6.4 | Is Diwali, aapke aangan mein khilega kamal. | "Is Diwali, aangan mein" / "khilega kamal" + gold lotus icon |
-| 3 | 6.4–11.4 | Pesh hai hamara Lotus Rangoli Stencil, khud design kiya aur 3D print kiya. | "Pesh hai hamara" / "Lotus Stencil" / chip "Designed & 3D printed by Psone Labs" |
+| 3 | 6.4–11.4 | Pesh hai hamara Lotus Rangoli Stencil, khud design kiya aur 3D print kiya. | "Pesh hai hamara" / "Lotus Stencil" / chip "Designed & 3D printed by PSOne Labs" |
 | 4 | 11.4–15.4 | Ekdum unique kamal design, Diwali ke liye perfect. | "Unique kamal design" / chip "Diwali special" |
 | 5 | 15.4–21.4 | Bas stencil rakho, rang bharo, aur sundar kamal rangoli ready! | "Bas 3 steps!" / chips 1-2-3 / "Perfect rangoli!" |
 | 6 | 21.4–26.0 | Diwali se pehle apna order karo, abhi DM karo! | "Diwali se pehle" / "order karo!" / "DM to order", then end card |
@@ -26,14 +26,18 @@ Devanagari for recording: `voiceover_devanagari.txt`.
 2. **Kamal (2.6–6.4s)**: three printed lotuses on the printer bed (WA0003 0–3s) in the arch, slow push-in. "Is Diwali, aangan mein"
    writes on, "khilega kamal" glows, a small gold lotus opens beside it. Kandils sway at the sides.
 3. **Introducing (6.4–11.4s)**: printer bed with lotuses (WA0004 0–6s) in the arch. "Pesh hai hamara / Lotus Stencil";
-   badge "Designed & 3D printed by Psone Labs".
+   badge "Designed & 3D printed by PSOne Labs".
 4. **Product (11.4–15.4s)**: hand-held white lotus in slow motion (WA0004 8–14s), whole stencil fitted in a tall arch.
    "Unique kamal design", chip "Diwali special", soft gold line fireworks.
 5. **Steps (15.4–21.4s)**: "1 Stencil rakho" on the white stencil (WA0003 5–8s, hand-held); "2 Rang bharo" on the real filling shot
    (WA0005 0–4s); "3 Rangoli ready!" on the finished lotus rangoli (WA0005 6–9s) with "Perfect rangoli!" and line fireworks.
    This ~4s is the only coloured footage.
 6. **CTA + end card (21.4–26s)**: white lotus (WA0004) with "Diwali se pehle order karo!" and a pulsing "DM to order"; then the dusk
-   end card: gold lotus, Psone Labs, LOTUS RANGOLI STENCIL, DM to order, three diyas, शुभ दीपावली, fade out.
+   end card: gold lotus, the PSOne Labs logo card, LOTUS RANGOLI STENCIL, DM to order, three diyas, शुभ दीपावली, fade out.
+
+Brand (from the client's own posts, `style_frames/reference_psone_labs_brand.jpg`): written **PSOne Labs**, tagline
+"Print • Create • Innovate"; terracotta "PSOne" + olive "Labs" on warm beige, rounded type (Quicksand used here).
+The end card carries that lock-up on a beige card with a thin gold edge so it sits in the night style.
 
 Style frames: `style_frames/` (hook, printer, steps, end card). Regenerate with
 `cd tools && python3 style_frames_lotus01.py <workdir> <outdir>`.
