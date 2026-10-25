@@ -3,17 +3,19 @@
 ## Chosen: Option B (Rose & Gold) + the client's own script
 
 Vertical 9:16, 24.5s (kept long on purpose: the three voice lines sit where they fit, the rest is visuals + text),
-voice-only, music added in the Instagram app. Draft: `lotus_reel_draft_v1_silent.mp4` (silent, waiting for the voice note).
+voice-only, music added in the Instagram app. Draft: `lotus_reel_draft_v2_silent.mp4` (silent, waiting for the voice note).
+To keep it real, the hand shots and the printer bed play full screen as filmed (soft rose shade top/bottom for text);
+only the opening and the second printer shot use the gold ring of lotus petals.
 Render: `cd tools && python3 render_lotus01.py <workdir> <workdir>/lotus_video_only.mp4`. Stills: `style_frames_b/`.
 
-| Time | Voiceover (client's words) | Shot (inside the gold ring of turning lotus petals) | On screen |
+| Time | Voiceover (client's words) | Shot | On screen |
 |---|---|---|---|
-| 0–3 | New day, new product! | White lotus held up (WA0004 12–13.8s, slow) | "New day," / "NEW PRODUCT!" |
-| 3–7 | Toh is baar humne banaya hai lotus stencil. | Printed lotuses on the bed (WA0004 0–4s) | "Is baar humne banaya..." / "LOTUS STENCIL" / "Designed & 3D printed by us" |
-| 7–10.5 | — | Bed, another angle (WA0003 0–3.5s) | "Fresh from our 3D printer" |
-| 10.5–14 | — | White lotus, slow motion (WA0004 10.5–12.5s) | "LOTUS RANGOLI STENCIL", gold sparkle bursts |
-| 14–16.5 | — | Petal close-up (WA0003 5.8–7.4s) | "Diwali special" |
-| 16.5–20.5 | Just fill in the colours and you're good to go! | Hand filling (WA0005 0.5–2.5s), then finished rangoli (WA0005 6–8s); only coloured footage | "Just fill in the colours" / "& you're good to go!" |
+| 0–3 | New day, new product! | Ring: white lotus held up (WA0004 12–13.8s, slow) | "New day," / "NEW PRODUCT!" |
+| 3–7 | Toh is baar humne banaya hai lotus stencil. | Full screen: printed lotuses on the bed (WA0004 0–4s) | "Is baar humne banaya..." / "LOTUS STENCIL" / "Designed & 3D printed by us" |
+| 7–10.5 | — | Ring: bed, another angle (WA0003 0–3.5s) | "Fresh from our 3D printer" |
+| 10.5–14 | — | Full screen: hand holding the white lotus, slow motion (WA0004 10.5–12.5s) | "LOTUS RANGOLI STENCIL", gold sparkle bursts |
+| 14–16.5 | — | Full screen: hand-held petal close-up (WA0003 5.8–8s) | "Diwali special" |
+| 16.5–20.5 | Just fill in the colours and you're good to go! | Full screen: hand filling (WA0005 0.5–2.5s), then finished rangoli (WA0005 6–8s); only coloured footage | "Just fill in the colours" / "& you're good to go!" |
 | 20.5–24.5 | — | End card | lotus icon, "Order now!", LOTUS RANGOLI STENCIL, "DM to order", diyas, शुभ दीपावली |
 
 Motion: petals around the ring turn slowly, pink bokeh and petals drift up, text writes on / glows in, soft dips to deep rose

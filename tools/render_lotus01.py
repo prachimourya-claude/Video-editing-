@@ -1,5 +1,6 @@
-"""Render the Lotus stencil reel (Diwali 02) in the chosen Rose & Gold look: footage plays inside a gold ring framed by
-slowly turning lotus petals; blush-to-rose background with gold mandala corners, drifting petals and bokeh.
+"""Render the Lotus stencil reel (Diwali 02) in the chosen Rose & Gold look. Some shots play inside a gold ring framed by
+slowly turning lotus petals on a rose backdrop (gold mandala corners, drifting petals and bokeh); the hand shots and the
+printer bed play full screen as filmed, so the reel stays real and authentic.
 ~24.5s; the client's three voiceover lines sit in scenes 1, 2 and 6, the rest is visuals + on-screen text.
 
 usage: cd tools && python3 render_lotus01.py <workdir> <out.mp4> [segment ...]
@@ -108,13 +109,37 @@ def dip(f, lt, dur, fin=0.25, fout=0.2):
         f.alpha_composite(Image.new("RGBA", (W, H), (70, 10, 40, int(255 * ease_io(a)))))
 
 
-def footage_scene(t0, t1, seed, shots, texts, ring_in=False):
-    """shots: list of (clip, ss, src_dur, out_dur, src_point, s); texts: callable(f, lt) drawing the text."""
-    bd, rg = Backdrop(seed), Ring()
+def scrim(top=True, h=700, alpha=190):
+    g = np.linspace(1, 0, h) ** 1.4 * alpha
+    if not top:
+        g = g[::-1]
+    im = Image.new("RGBA", (W, h), (70, 10, 40, 0))
+    im.putalpha(Image.fromarray(np.broadcast_to(g[:, None], (h, W)).astype(np.uint8)))
+    return im
+
+
+def footage_scene(t0, t1, seed, shots, texts, ring_in=False, full=False):
+    """shots: list of (clip, ss, src_dur, out_dur, src_point, s); texts: callable(f, lt) drawing the text.
+    full=True plays the clip full screen as filmed (hand and all, slow push-in on src_point) with soft rose
+    scrims for the text; otherwise it sits in the gold ring of lotus petals over the rose backdrop."""
+    dur = t1 - t0
     frames = []
+    if full:
+        top, bot = scrim(True), scrim(False, 600, 170)
+        for name, ss, sd, od, src, s in shots:
+            frames += [(fr, src, s) for fr in R.footage(name, ss, sd, od, (1.0, 1.06), (src[0] / W, src[1] / H), grade=CLEAN)]
+        for i, (fr, src, s) in enumerate(frames[:int(round(dur * FPS))]):
+            lt = i / FPS
+            f = fr
+            f.alpha_composite(top)
+            f.alpha_composite(bot, (0, H - bot.height))
+            texts(f, lt)
+            dip(f, lt, dur)
+            yield f
+        return
+    bd, rg = Backdrop(seed), Ring()
     for name, ss, sd, od, src, s in shots:
         frames += [(fr, src, s) for fr in R.footage(name, ss, sd, od, (1.0, 1.0), grade=CLEAN)]
-    dur = t1 - t0
     for i, (fr, src, s) in enumerate(frames[:int(round(dur * FPS))]):
         t = t0 + i / FPS
         lt = t - t0
@@ -145,7 +170,7 @@ def seg_l2(t0, t1):
         TT.wipe(f, a, W / 2, 260, ease_io((lt - 0.15) / 0.8))
         TT.rise(f, b, W / 2, 410, lt, 1.0, 0.6, dy=0, scale_from=0.7)
         TT.rise(f, c, W / 2, 1780, lt, 1.6, 0.45, dy=0, scale_from=0.7)
-    return footage_scene(t0, t1, 14, [("L4", 0.0, 4.0, t1 - t0, (540, 960), 0.95)], texts)
+    return footage_scene(t0, t1, 14, [("L4", 0.0, 4.0, t1 - t0, (540, 960), 1.0)], texts, full=True)
 
 
 def seg_l3(t0, t1):
@@ -163,7 +188,7 @@ def seg_l4(t0, t1):
         TT.rise(f, a, W / 2, 1760, lt, 0.3, 0.6)
         TT.burst(f, 170, 620, 70, T.GOLD, lt, 0.6)
         TT.burst(f, 900, 1620, 60, T.GOLD_L, lt, 1.6)
-    return footage_scene(t0, t1, 16, [("L4", 10.5, 2.0, t1 - t0, (540, 690), 0.76)], texts)
+    return footage_scene(t0, t1, 16, [("L4", 10.5, 2.0, t1 - t0, (540, 800), 1.0)], texts, full=True)
 
 
 def seg_l5(t0, t1):
@@ -171,7 +196,7 @@ def seg_l5(t0, t1):
 
     def texts(f, lt):
         TT.wipe(f, a, W / 2, 330, ease_io((lt - 0.2) / 0.8))
-    return footage_scene(t0, t1, 17, [("L3", 5.8, 1.6, t1 - t0, (560, 1250), 0.72)], texts)
+    return footage_scene(t0, t1, 17, [("L3", 5.8, 2.2, t1 - t0, (560, 1100), 1.0)], texts, full=True)
 
 
 def seg_l6(t0, t1):
@@ -183,7 +208,7 @@ def seg_l6(t0, t1):
         TT.rise(f, b, W / 2, 400, lt, 2.0, 0.6, dy=0, scale_from=0.7)
         TT.burst(f, 180, 700, 70, T.GOLD, lt, 2.2)
         TT.burst(f, 900, 640, 60, O.PINK, lt, 2.6)
-    return footage_scene(t0, t1, 18, [("L5", 0.5, 2.0, 2.0, (550, 870), 0.85), ("L5", 6.0, 2.0, 2.0, (550, 750), 0.85)], texts)
+    return footage_scene(t0, t1, 18, [("L5", 0.5, 2.0, 2.0, (550, 870), 1.0), ("L5", 6.0, 2.0, 2.0, (550, 750), 1.0)], texts, full=True)
 
 
 def seg_l7(t0, t1):
