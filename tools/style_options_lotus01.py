@@ -1,6 +1,7 @@
 """Three alternative looks for the Lotus stencil reel (hook + end card each), for the client to pick from.
 
   A  Brand Beige   - PSOne Labs' own palette: warm beige, terracotta and olive, botanical line art, rounded photo card
+(no logo block on the end cards: the reel is posted on the brand's own page, so they end on "Order now!" + "DM to order")
   B  Rose & Gold   - blush to deep rose, gold mandala corners, footage in a gold ring framed by lotus petals
   C  Mint Pop      - mint and peach blobs, polaroid photo with washi tape, sticker badges, handwritten notes
 
@@ -133,20 +134,13 @@ def a_hook():
 
 def a_end():
     f = a_bg(2)
-    paste_center(f, lotus_icon(L.TERRA, (170, 90, 64), 0.6), W / 2, 420)
-    paste_center(f, L.brand_card(820), W / 2, 700)
-    paste_center(f, txt("LOTUS RANGOLI STENCIL", font("quicksand_b.ttf", 40), L.OLIVE, track=8), W / 2, 980)
-    paste_center(f, R.pill("DM to order", font("quicksand_b.ttf", 52), fg=(255, 250, 240), bg=L.TERRA, pad=(56, 22)), W / 2, 1120)
-    bar = Image.new("RGBA", (760, 100), (0, 0, 0, 0))
-    d = ImageDraw.Draw(bar)
-    d.rounded_rectangle((0, 0, 759, 99), radius=50, fill=(255, 251, 244, 255))
-    d.text((200, 50), "Mumbai, India", font=font("quicksand_sb.ttf", 38), fill=L.TAUPE, anchor="mm")
-    d.line((380, 25, 380, 75), fill=L.TAUPE, width=2)
-    d.text((570, 50), "DM to Order", font=font("quicksand_sb.ttf", 38), fill=L.TERRA, anchor="mm")
-    paste_center(f, R.with_shadow(bar, offset=(0, 8), blur=14, alpha=60, color=(120, 90, 60)), W / 2, 1300)
-    paste_center(f, txt("शुभ दीपावली", font("tiro.ttf", 90), L.TERRA), W / 2, 1500)
+    paste_center(f, lotus_icon(L.TERRA, (170, 90, 64), 0.6), W / 2, 520)
+    paste_center(f, txt("Order now!", font("quicksand_b.ttf", 160), L.TERRA), W / 2, 740)
+    paste_center(f, txt("LOTUS RANGOLI STENCIL", font("quicksand_b.ttf", 40), L.OLIVE, track=8), W / 2, 920)
+    paste_center(f, R.pill("DM to order", font("quicksand_b.ttf", 52), fg=(255, 250, 240), bg=L.TERRA, pad=(56, 22)), W / 2, 1070)
+    paste_center(f, txt("शुभ दीपावली", font("tiro.ttf", 90), L.TERRA), W / 2, 1380)
     for x in (360, 540, 720):
-        T.diya_glow(f, x, 1700, 150)
+        T.diya_glow(f, x, 1580, 150)
     return f
 
 
@@ -198,9 +192,9 @@ def b_hook():
 
 def b_end():
     f = b_bg(6)
-    paste_center(f, lotus_icon(T.GOLD, T.AMBER, 0.7), W / 2, 420)
-    paste_center(f, L.brand_card(820), W / 2, 700)
-    paste_center(f, T.glow_text("LOTUS RANGOLI STENCIL", T.mont(36), T.CREAM, ga=0, track=8), W / 2, 970)
+    paste_center(f, lotus_icon(T.GOLD, T.AMBER, 0.7), W / 2, 500)
+    paste_center(f, T.glow_text("Order now!", T.yeseva(150), (T.GOLD_L, T.GOLD)), W / 2, 730)
+    paste_center(f, T.glow_text("LOTUS RANGOLI STENCIL", T.mont(36), T.CREAM, ga=0, track=8), W / 2, 950)
     paste_center(f, R.pill("DM to order", T.mont(48), fg=ROSE_D, bg=T.GOLD_L, pad=(56, 22)), W / 2, 1110)
     for k, (x, y, w) in enumerate(((300, 1500, 220), (780, 1500, 220), (540, 1620, 240))):
         T.diya_glow(f, x, y, w)
@@ -261,9 +255,9 @@ def c_hook():
 
 def c_end():
     f = c_bg(9)
-    paste_center(f, lotus_icon(ROSE, (190, 60, 110), 0.6), W / 2, 420)
-    paste_center(f, L.brand_card(820), W / 2, 700)
-    paste_center(f, txt("LOTUS RANGOLI STENCIL", font("poppins_xb.ttf", 44), MINT_D), W / 2, 980)
+    paste_center(f, lotus_icon(ROSE, (190, 60, 110), 0.6), W / 2, 500)
+    paste_center(f, txt("Order now!", font("poppins_xb.ttf", 140), MINT_D), W / 2, 720)
+    paste_center(f, txt("LOTUS RANGOLI STENCIL", font("caveat.ttf", 90), ROSE), W / 2, 900)
     paste_center(f, sticker("DM to order", font("poppins_xb.ttf", 56), (255, 255, 255), ROSE, 3), W / 2, 1140)
     paste_center(f, txt("Happy Diwali!", font("caveat.ttf", 130), ROSE), W / 2, 1480)
     paste_center(f, txt("शुभ दीपावली", font("tiro.ttf", 80), MINT_D), W / 2, 1640)
