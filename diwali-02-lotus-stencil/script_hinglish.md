@@ -1,5 +1,27 @@
 # Diwali 02 — Lotus Rangoli Stencil (PSOne Labs)
 
+## Chosen: Option B (Rose & Gold) + the client's own script
+
+Vertical 9:16, ~14s, voice-only (music added in the Instagram app). Stills: `style_frames_b/`
+(`cd tools && python3 style_frames_lotus_b.py <workdir> <outdir>`).
+
+| Time | Voiceover (client's words) | Shot (inside the gold ring of lotus petals) | On screen |
+|---|---|---|---|
+| 0–2.5 | New day, new product! | White lotus held up (WA0004 12.5s) | "New day," / "NEW PRODUCT!" |
+| 2.5–6 | Toh is baar humne banaya hai Lotus Stencil. | Printed lotuses on the bed (WA0004 0–4s) | "Is baar humne banaya..." / "LOTUS STENCIL" / "Designed & 3D printed by us" |
+| 6–8.5 | (no voice) | White lotus in slow motion (WA0004 10.5–12s) | "LOTUS RANGOLI STENCIL" |
+| 8.5–12 | Just fill in the colours and you're good to go! | Filling, then finished rangoli (WA0005 1–4s, 6–8s; the only coloured footage) | "Just fill in the colours" / "& you're good to go!" |
+| 12–14 | (no voice) | End card | lotus icon, "Order now!", LOTUS RANGOLI STENCIL, "DM to order", diyas, शुभ दीपावली |
+
+Motion: petals around the ring slowly turn, pink bokeh and petals drift, gold mandala corners shimmer, text writes on / glows in,
+soft dissolves between shots, diya flames flicker on the end card.
+
+Devanagari for recording: `voiceover_devanagari.txt`.
+
+---
+
+## Earlier drafts (superseded)
+
 Vertical 9:16, ~26s, for Instagram Reels (also YouTube Shorts / Facebook Reels). Posted 25 Oct 2026, the day after the Kalash reel,
 so it opens with "New day, new product!". Same night style as the Kalash reel and teaser (night-blue sky to purple/pink,
 gold Mughal arches, sky lanterns, kandils, diyas). The product sold is the plain white stencil: white footage everywhere,
