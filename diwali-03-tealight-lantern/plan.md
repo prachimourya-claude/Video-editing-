@@ -1,6 +1,20 @@
 # Diwali 03 — Star Lantern (PSOne Labs)
 
-**Chosen:** name **Star Lantern** ("tea-light holder" in the caption), look **F — Glow Night**. Script: waiting for the client.
+**Chosen:** name **Star Lantern** ("tea-light holder" in the caption), look **F — Glow Night**, the client's own script
+(`voiceover.txt`, voice note AUD-20261026-WA0005). The voiceover shows the product; "Order now · DM to order" is on screen.
+
+**Final:** `star_lantern_final_voice_only.mp4`, 32.5s, voice only (music added on Instagram).
+Render: `cd tools && python3 render_lantern01.py <workdir> <workdir>/lantern_video_only.mp4`, then `tools/mix_lantern01_vo.sh <workdir>`.
+
+| Reel | Clip (WA0001) | Voice | On screen |
+|---|---|---|---|
+| 0–8 | Shade on the printer, picked up, turned (0–7.5s) | Another day, another product · Diwali aa rahi hai… · Toh humne ye 3D print kiya | "Another day, another product" → STAR LANTERN · 3D PRINTED |
+| 8–13.4 | Look ahead: the finished lantern, lit (30–35.4s) | Upar star pattern, neeche terracotta look wala base · Kaafi beautiful lag raha hai | "Star pattern top" / "Terracotta-look base" |
+| 13.4–19 | Inner piece, tea light on, into the base (7.5–23.5s, ~3x) | Tea light ko bas base se on karo, aur aapka lantern ready | "Tea light inside" |
+| 19–23.5 | Shade goes on (23.5–30s) | Aur battery khatam ho jaye, toh tea light badal bhi sakte ho | "Replaceable tea light" |
+| 23.5–32.5 | Lights off (37.6–44s, slowed): purple-pink night, sky lanterns, line fireworks | DM to order now | "Lights off" → STAR LANTERN · 3D printed tea-light lantern · Order now · DM to order · Happy Diwali |
+
+String lights twinkle across the top until the lights go off. Straight cuts throughout.
 
 3D-printed tea-light lantern: chocolate-brown star-lattice (asanoha / jaali) shade on a terracotta base; an LED tea light
 inside throws a star pattern. Footage: VID-20261026-WA0001.mp4(44s, 478x850) + three hand-held photos.

@@ -1,6 +1,8 @@
 """Render the Star Lantern reel (Diwali 03), look F "Glow Night": the client's whole clip plays full screen in order,
 with quiet labels and twinkling string lights; when the room lights go off the shot tints to a purple-pink night,
-sky lanterns float up and soft line fireworks burst, then "STAR LANTERN · Order now · DM to order". ~29s.
+sky lanterns float up and soft line fireworks burst, then "STAR LANTERN · Order now · DM to order". 32.5s, cut to
+the client's voiceover (add it with tools/mix_lantern01_vo.sh). Shot 2 is a short look ahead at the finished, lit
+lantern so "star pattern top, terracotta-look base" plays over both parts.
 
 usage: cd tools && python3 render_lantern01.py <workdir> <out.mp4> [segment ...]
 <workdir>/src/T1.mp4 = VID-20261026-WA0001 (44s); fonts/ as for render_reel01_night.py.
@@ -22,14 +24,13 @@ CREAM = (255, 246, 230)
 PINK = (255, 105, 160)
 SKYBLUE = (120, 220, 255)
 LIGHTS_OFF = 39.1   # source second at which the room lights go off
-# (name, start, end, source start, source end, label)
+# (name, reel start, reel end, source start, source end); cut to the client's voiceover (tools/mix_lantern01_vo.sh)
 SEGMENTS = [
-    ("t1", 0.0, 4.0, 0.0, 7.0),     # shade on the printer bed, picked up
-    ("t2", 4.0, 7.0, 7.5, 13.0),    # the printed base
-    ("t3", 7.0, 12.0, 13.5, 23.5),  # tea light switched on, placed in the base
-    ("t4", 12.0, 17.0, 23.5, 30.0), # shade goes on, star pattern lights up
-    ("t5", 17.0, 20.0, 30.0, 37.6), # lit lantern on the bed
-    ("t6", 20.0, 29.0, 37.6, 44.0), # lights off: glow night + order
+    ("t1", 0.0, 8.0, 0.0, 7.5),      # shade on the printer bed, picked up, turned       | VO 1-3
+    ("t2", 8.0, 13.4, 30.0, 35.4),   # preview: the finished lantern, lit (top + base)   | VO 4-5
+    ("t3", 13.4, 19.0, 7.5, 23.5),   # inner piece, tea light switched on, into the base | VO 6
+    ("t4", 19.0, 23.5, 23.5, 30.0),  # shade goes on, star pattern lights up             | VO 6 end, VO 7
+    ("t6", 23.5, 32.5, 37.6, 44.0),  # lights off: glow night + order                    | VO 8
 ]
 
 
@@ -76,39 +77,48 @@ def fade_out(lt, dur, t_out=0.3):
 
 
 def seg_t1(t0, t1, ss, se):
-    a = label("New day, new product", 110)
+    a = label("Another day, another product", 82)
     b = T.glow_text("STAR LANTERN", T.yeseva(110), (T.GOLD_L, T.GOLD))
     c = T.glow_text("3D PRINTED", T.mont(38), CREAM, ga=0, track=12)
 
     def texts(f, lt, dur):
-        TT.wipe(f, a, W / 2, 270, ease_io((lt - 0.2) / 0.8))
-        TT.rise(f, b, W / 2, 410, lt, 1.4, 0.6, dy=0, scale_from=0.75)
-        TT.rise(f, c, W / 2, 520, lt, 2.0, 0.5)
+        o = fade_out(lt, dur)
+        TT.wipe(f, a, W / 2, 270, ease_io((lt - 0.2) / 0.8), clamp((2.2 - lt) / 0.3))
+        if lt > 2.3:
+            paste_center(f, b, W / 2, 330, ease_out((lt - 2.3) / 0.5) * o, 0.75 + 0.25 * ease_back((lt - 2.3) / 0.6))
+        if lt > 6.9:
+            paste_center(f, c, W / 2, 450, ease_out((lt - 6.9) / 0.4) * o)
     return day_segment(t0, t1, ss, se, texts)
 
 
-def simple_label(text):
+def two_labels(top, bottom, t_top, t_bottom):
+    a, b = label(top), label(bottom)
+
+    def texts(f, lt, dur):
+        o = fade_out(lt, dur)
+        TT.wipe(f, a, W / 2, 280, ease_io((lt - t_top) / 0.7), o)
+        TT.wipe(f, b, W / 2, 390, ease_io((lt - t_bottom) / 0.7), o)
+    return texts
+
+
+def simple_label(text, t_in=0.2):
     im = label(text)
 
     def texts(f, lt, dur):
-        TT.wipe(f, im, W / 2, 300, ease_io((lt - 0.2) / 0.7), fade_out(lt, dur))
+        TT.wipe(f, im, W / 2, 300, ease_io((lt - t_in) / 0.7), fade_out(lt, dur))
     return texts
 
 
 def seg_t2(t0, t1, ss, se):
-    return day_segment(t0, t1, ss, se, simple_label("Printed base"))
+    return day_segment(t0, t1, ss, se, two_labels("Star pattern top", "Terracotta-look base", 0.4, 1.9))
 
 
 def seg_t3(t0, t1, ss, se):
-    return day_segment(t0, t1, ss, se, simple_label("Tea light inside"))
+    return day_segment(t0, t1, ss, se, simple_label("Tea light inside", 2.6))
 
 
 def seg_t4(t0, t1, ss, se):
-    return day_segment(t0, t1, ss, se, simple_label("Shade on"))
-
-
-def seg_t5(t0, t1, ss, se):
-    return day_segment(t0, t1, ss, se, lambda f, lt, dur: None)
+    return day_segment(t0, t1, ss, se, simple_label("Replaceable tea light", 0.6))
 
 
 def seg_t6(t0, t1, ss, se):
