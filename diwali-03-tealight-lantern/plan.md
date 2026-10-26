@@ -15,6 +15,7 @@ Render: `cd tools && python3 render_lantern01.py <workdir> <workdir>/lantern_vid
 | 23.5–32.5 | Lights off (37.6–44s, slowed): purple-pink night, sky lanterns, line fireworks | DM to order now | "Lights off" → STAR LANTERN · 3D printed tea-light lantern · Order now · DM to order · Happy Diwali |
 
 String lights twinkle across the top until the lights go off. Straight cuts throughout.
+All labels sit on dark plum pills with a thin gold edge (white script text was unreadable on the white wall/printer).
 
 3D-printed tea-light lantern: chocolate-brown star-lattice (asanoha / jaali) shade on a terracotta base; an LED tea light
 inside throws a star pattern. Footage: VID-20261026-WA0001.mp4(44s, 478x850) + three hand-held photos.

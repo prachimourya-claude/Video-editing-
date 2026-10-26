@@ -34,8 +34,22 @@ SEGMENTS = [
 ]
 
 
-def label(t, size=96):
-    return T.glow_text(t, T.allura(size), CREAM, glow=(255, 150, 200), ga=110)
+PLUM = (70, 18, 58)
+
+
+def label(t, size=46):
+    """Labels sit on a dark plum pill with a thin gold edge so they read on the white wall and printer."""
+    return R.pill(t, T.mont(size), fg=CREAM, bg=PLUM, pad=(40, 20), alpha=225, border=T.GOLD + (255,))
+
+
+def backed(im, pad=(44, 14)):
+    """Put a glowing title on a dark plum rounded card (same reason as label)."""
+    w, h = im.width + 2 * pad[0], im.height + 2 * pad[1]
+    card = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    ImageDraw.Draw(card).rounded_rectangle((0, 0, w - 1, h - 1), radius=min(48, h // 2), fill=PLUM + (215,),
+                                           outline=T.GOLD + (255,), width=3)
+    card.alpha_composite(im, pad)
+    return R.with_shadow(card, offset=(0, 8), blur=14, alpha=120, color=(10, 4, 10))
 
 
 class Lights:
@@ -77,9 +91,9 @@ def fade_out(lt, dur, t_out=0.3):
 
 
 def seg_t1(t0, t1, ss, se):
-    a = label("Another day, another product", 82)
-    b = T.glow_text("STAR LANTERN", T.yeseva(110), (T.GOLD_L, T.GOLD))
-    c = T.glow_text("3D PRINTED", T.mont(38), CREAM, ga=0, track=12)
+    a = label("Another day, another product")
+    b = backed(T.glow_text("STAR LANTERN", T.yeseva(104), (T.GOLD_L, T.GOLD), ga=60))
+    c = label("3D PRINTED", 36)
 
     def texts(f, lt, dur):
         o = fade_out(lt, dur)
@@ -87,7 +101,7 @@ def seg_t1(t0, t1, ss, se):
         if lt > 2.3:
             paste_center(f, b, W / 2, 330, ease_out((lt - 2.3) / 0.5) * o, 0.75 + 0.25 * ease_back((lt - 2.3) / 0.6))
         if lt > 6.9:
-            paste_center(f, c, W / 2, 450, ease_out((lt - 6.9) / 0.4) * o)
+            paste_center(f, c, W / 2, 480, ease_out((lt - 6.9) / 0.4) * o)
     return day_segment(t0, t1, ss, se, texts)
 
 
@@ -97,7 +111,7 @@ def two_labels(top, bottom, t_top, t_bottom):
     def texts(f, lt, dur):
         o = fade_out(lt, dur)
         TT.wipe(f, a, W / 2, 280, ease_io((lt - t_top) / 0.7), o)
-        TT.wipe(f, b, W / 2, 390, ease_io((lt - t_bottom) / 0.7), o)
+        TT.wipe(f, b, W / 2, 400, ease_io((lt - t_bottom) / 0.7), o)
     return texts
 
 
@@ -130,9 +144,9 @@ def seg_t6(t0, t1, ss, se):
     yy = np.linspace(0, 1, H)[:, None, None]
     tint = (np.array([60, 20, 90], np.float32) * (1 - yy) + np.array([120, 20, 80], np.float32) * yy)
     tint = np.broadcast_to(tint, (H, W, 3)).astype(np.float32)
-    a = label("Lights off", 120)
-    b = T.glow_text("STAR LANTERN", T.yeseva(110), (T.GOLD_L, T.GOLD))
-    c = T.glow_text("3D printed tea-light lantern", T.allura(84), CREAM, glow=(255, 150, 200), ga=90)
+    a = label("Lights off", 52)
+    b = backed(T.glow_text("STAR LANTERN", T.yeseva(104), (T.GOLD_L, T.GOLD), ga=60))
+    c = label("3D printed tea-light lantern", 38)
     d = R.pill("Order now  ·  DM to order", T.mont(44), fg=(90, 20, 60), bg=T.GOLD_L, pad=(46, 22))
     sh = T.glow_text("Happy Diwali", T.allura(110), CREAM, glow=(255, 150, 200), ga=110)
     for i, f in enumerate(frames(ss, se, dur, (1.0, 1.08))):
@@ -155,7 +169,7 @@ def seg_t6(t0, t1, ss, se):
         if 0.6 < e < 3.4:
             TT.wipe(f, a, W / 2, 330, ease_io((e - 0.6) / 0.8), clamp((3.4 - e) / 0.3))
         TT.rise(f, b, W / 2, 300, e, 3.6, 0.7, dy=0, scale_from=0.75)
-        TT.wipe(f, c, W / 2, 420, ease_io((e - 4.1) / 0.8))
+        TT.wipe(f, c, W / 2, 450, ease_io((e - 4.1) / 0.8))
         if e > 4.6:
             pulse = 1 + 0.035 * math.sin((e - 4.6) * 6)
             paste_center(f, d, W / 2, 1600, ease_out((e - 4.6) / 0.35), pulse * (0.7 + 0.3 * ease_back((e - 4.6) / 0.45)))
