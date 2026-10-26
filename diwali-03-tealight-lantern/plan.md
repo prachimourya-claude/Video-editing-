@@ -15,6 +15,14 @@ export (music added on Instagram), simple natural words, no logo block at the en
 | Taara Tea-light Lantern | "Taara" = star; playful, easy to say |
 | Roshni Jaali Lamp | "Roshni" = light; sounds festive |
 | Noor Lantern | "Noor" = glow; elegant, one word |
+| Jharokha Lantern | after the carved jharokha windows the pattern recalls |
+| Chandni Lantern | "Chandni" = moonlight; soft and pretty |
+| Jugnu Lamp | "Jugnu" = firefly; cute, memorable |
+| Deepika Lantern | from "deep" (lamp); classic Diwali feel |
+| Tara Jaal | "star net": the lattice of stars |
+| Prakash Pot | "Prakash" = light; earthy, fits the terracotta base |
+| GlowJaal | modern, Insta-friendly mix of glow + jaal |
+| Starlight Votive | English option, premium sounding |
 
 ## Script options (simple and natural)
 
@@ -55,3 +63,6 @@ Straight cuts throughout; one soft fade only at the lights-off moment. Text sits
 | A — Warm Minimal | Cream text, thin gold line, slightly warm grade | Nothing else: elegant serif + small caps |
 | B — Diya Glow | Gold glowing title, edges gently darkened | A few tiny floating sparks in the dark shot only |
 | C — Terracotta | Terracotta pills (matches the base), cream handwriting | Three tiny hand-drawn stars near the text |
+| D — Festive Frame | Saffron-to-magenta background, teal sticker banners, cream handwriting | Full clip in a white-edged rounded frame (slightly smaller); twinkling string lights; banners pop in with a bounce; bokeh drifts |
+| E — Star Pattern Pop | Saffron, teal, magenta, pink | The lantern's own star lattice draws itself line by line in the corners; bold tilted sticker titles pop in; clip stays full screen |
+| F — Glow Night | Gold glow text, purple-pink night tint at lights-off | String lights twinkle at the top; at lights-off the room tints purple-pink, sky lanterns float up and gold/pink/blue line fireworks burst |
