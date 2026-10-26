@@ -252,7 +252,7 @@ def f_hook():
     f = still(4.5)
     T.string_lights(f, 30, 80, n=16)
     paste_center(f, T.glow_text("New day, new product", T.allura(110), CREAM, glow=(255, 150, 200), ga=110), W / 2, 270)
-    paste_center(f, T.glow_text("JAALI LANTERN", T.yeseva(110), (T.GOLD_L, T.GOLD)), W / 2, 410)
+    paste_center(f, T.glow_text("STAR LANTERN", T.yeseva(110), (T.GOLD_L, T.GOLD)), W / 2, 410)
     return f
 
 

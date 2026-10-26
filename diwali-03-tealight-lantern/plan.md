@@ -1,4 +1,6 @@
-# Diwali 03 — Tea-light Lantern (PSOne Labs)
+# Diwali 03 — Star Lantern (PSOne Labs)
+
+**Chosen:** name **Star Lantern** ("tea-light holder" in the caption), look **F — Glow Night**. Script: waiting for the client.
 
 3D-printed tea-light lantern: chocolate-brown star-lattice (asanoha / jaali) shade on a terracotta base; an LED tea light
 inside throws a star pattern. Footage: VID-20261026-WA0001.mp4(44s, 478x850) + three hand-held photos.
