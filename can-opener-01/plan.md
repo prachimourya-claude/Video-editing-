@@ -72,3 +72,25 @@ drawn bow / cat / heart icons for the coming-soon line.
 - Also for: bridal / mehendi return gifts, girls' night kits, influencers' PR boxes.
 
 Stills: `style_options/` (hook + B2B still for each option; `cd tools && python3 style_options_opener01.py <workdir> <outdir>`).
+
+---
+
+## Round 2 (client: one reel for both audiences; earlier looks too similar to past reels; scripts too "scripty")
+
+Stills: `style_options_round2/` (`cd tools && python3 style_options_opener02.py <workdir> <outdir>`).
+All three use the same real-footage order, full screen:
+can + heart demo (O20) → chocolate demo (O18) → bed flexed, pieces pop off (O22) → quick plier clean-up (O21) →
+both held (O19 / P1) → initials close-up (P2) → end.
+
+| Design | What's on screen | How it moves |
+|---|---|---|
+| 1 — Group Chat | Phone chat bubbles over the footage. Friends: "just got my nails done 💅" / "but can't open my can 😭" / "bro use this 👇" / "wait it works??" / "the chocolate one 😍" / "fresh off the printer". Then a salon chat: "can you put my salon name on it?" / "yes, any name ✨" / "bulk for salons too 🎀" / "bows & cats next 🐱" / "DM to order 📩" | Bubbles pop in one by one with "typing…" dots before each |
+| 2 — Salon Receipt | A torn paper receipt in typewriter font: "1x fresh gel set … OK / 1x cold drink … OK / 0x broken nails … OK" + red "NAIL SAFE" stamp; later a "SALON ORDER" receipt: name … YOUR SALON / shapes … heart, choco / next … bow, cat / qty … bulk + "CUSTOM" stamp, "DM TO ORDER" | Receipt slides up, lines print one at a time, stamp thumps on |
+| 3 — Magazine | Fashion-cover type in black/white blocks: "FRESH NAILS." / "Zero broken ones." / "THE CHOCOLATE ONE." / "FOR NAIL TECHS" / "Your salon's name. On every one." / "BOWS + CATS NEXT", red marker circles and notes, film grain, "DM TO ORDER · BULK OK" | Words slam in on each cut, marker circles draw themselves |
+
+### Voice options (casual, like talking to a friend)
+
+- **A — light voice:** "Okay, long nails walon… ye tumhare liye." · "Can kholna? Ab koi stress nahi." · "Heart chahiye ya chocolate?" ·
+  "Naam bhi daal dete hain, salon ka bhi." · "Nail techs, apne clients ko de ke dekho." · "Bows aur cats bhi aa rahe hain."
+- **B — no voice:** the chat / receipt / magazine text tells the story; add a trending song on Instagram.
+- **C — two lines only:** "Nails done? Can pe nail mat todo, ye use karo." · "Salon wale? Apna naam likhwa lo, DM karo."
