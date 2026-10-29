@@ -105,18 +105,20 @@ one by one, then the salon line and "DM to order".
 
 ## Chosen: Group Chat, the creator's trip story
 
-`can_opener_reel_group_chat.mp4`: 30.5s, no voice (music added on Instagram).
-Render: `cd tools && python3 render_opener01.py <workdir> <workdir>/opener_video_only.mp4` (then add a silent audio track).
+`can_opener_reel_group_chat_v2.mp4`: 44s, no voice (music added on Instagram). v2 slows the chat to ~2.2s per bubble
+so every message can be read. Render: `cd tools && python3 render_opener01.py <workdir> <workdir>/opener_video_only.mp4`
+(then add a silent audio track).
 
 | Time | Footage | Chat |
 |---|---|---|
-| 0–7 | O20 can in hand (slowed) | trip gang: Riya "how's the trip? 🏔" · "amazing! got my nails done 💅" · "but now I can't open my can 😭" · Sana "lol the long nail struggle" · "wish I had something small + cute" · "that I could just hang on my bag 🔑" |
-| 7–10 | O22 bed flexed, openers pop off | "so I made one 🤭" |
-| 10–14.5 | O20 heart opens the can | Riya "WAIT it works?? 😳" |
-| 14.5–18 | O18 chocolate opens the can | "chocolate one too 🍫" |
-| 18–20.5 | O19 both held | "has a keychain hole ✨" |
-| 20.5–25 | P2 initials (slow zoom) | Your Nail Studio: "can you put my salon name on it?" · "yes, any name ✨" · "bulk for salons too 🎀" |
-| 25–28 | More shapes grid (tiles pop in) | — |
-| 28–30.5 | P1 both openers | "DM to order 📩" + "Order now · DM to order" |
+| 0–7 | O20 can in hand (slowed) | trip gang: Riya "how's the trip? 🏔" · "amazing! got my nails done 💅" · "but now I can't open my can 😭" |
+| 7–13.5 | O22 prints waiting on the bed | Sana "lol the long nail struggle" · "wish I had something small + cute" · "that I could just hang on my bag 🔑" |
+| 13.5–17 | O22 bed flexed, openers pop off | "so I made one 🤭" |
+| 17–22.5 | O20 heart opens the can | Riya "WAIT it works?? 😳" |
+| 22.5–26.5 | O18 chocolate opens the can | "chocolate one too 🍫" |
+| 26.5–30 | O19 both held | "has a keychain hole ✨" |
+| 30–37 | P2 initials (slow zoom) | Your Nail Studio: "can you put my salon name on it?" · "yes, any name ✨" · "bulk for salons too 🎀" |
+| 37–41 | More shapes grid (tiles pop in) | — |
+| 41–44 | P1 both openers | "DM to order 📩" + "Order now · DM to order" |
 
 Friends' messages get "typing…" dots first; older bubbles scroll away (4 on screen at most).
