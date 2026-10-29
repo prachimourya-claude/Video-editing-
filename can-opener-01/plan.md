@@ -105,21 +105,24 @@ one by one, then the salon line and "DM to order".
 
 ## Chosen: Group Chat, the creator's trip story
 
-`can_opener_reel_group_chat_v3.mp4`: 53.5s, no voice (music added on Instagram). v3 opens on a short Pinterest clip of
-fresh nails (N1, supplied by the client) and slows the chat to ~3s per bubble.
-Render: `cd tools && python3 render_opener01.py <workdir> <workdir>/opener_video_only.mp4` (then add a silent audio track).
+`can_opener_reel_group_chat_v4.mp4`: 59s, chat sound effects only (music added on Instagram). v4 plays both openers until
+the can is open (chocolate ending at near real speed) and adds message "pop"/ding sounds and typing clicks.
+Render: `cd tools && python3 render_opener01.py <workdir> <workdir>/opener_video_only.mp4`, then
+`python3 sfx_opener01.py <workdir> <workdir>/opener_sfx.wav` and mux the two.
 
 | Time | Footage | Chat |
 |---|---|---|
-| 0–6 | N1 fresh nails | trip gang: Riya "how's the trip? 🏔" · "amazing! got my nails done 💅" |
+| 0–6 | N1 fresh nails (Pinterest clip from the client) | trip gang: Riya "how's the trip? 🏔" · "amazing! got my nails done 💅" |
 | 6–12 | O20 can in hand | "but now I can't open my can 😭" · Sana "lol the long nail struggle" |
 | 12–18.5 | O22 prints waiting on the bed | "wish I had something small + cute" · "that I could just hang on my bag 🔑" |
 | 18.5–22.5 | O22 bed flexed, openers pop off | "so I made one 🤭" |
-| 22.5–28.5 | O20 heart opens the can | Riya "WAIT it works?? 😳" |
-| 28.5–33 | O18 chocolate opens the can | "chocolate one too 🍫" |
-| 33–37 | O19 both held | "has a keychain hole ✨" |
-| 37–46 | P2 initials (slow zoom) | Your Nail Studio: "can you put my salon name on it?" · "yes, any name ✨" · "bulk for salons too 🎀" |
-| 46–50 | More shapes grid (tiles pop in) | — |
-| 50–53.5 | P1 both openers | "DM to order 📩" + "Order now · DM to order" |
+| 22.5–29.5 | O20 heart hooked on, lifted, can open | Riya "WAIT it works?? 😳" |
+| 29.5–33.5 | O18 chocolate hooked on | "chocolate one too 🍫" |
+| 33.5–38.5 | O18 chocolate opening, near real speed | "no broken nails 💅" (as the tab lifts) |
+| 38.5–42.5 | O19 both held | "has a keychain hole ✨" |
+| 42.5–51.5 | P2 initials (slow zoom) | Your Nail Studio: "can you put my salon name on it?" · "yes, any name ✨" · "bulk for salons too 🎀" |
+| 51.5–55.5 | More shapes grid (tiles pop in) | — |
+| 55.5–59 | P1 both openers | "DM to order 📩" + "Order now · DM to order" |
 
-Friends' messages get "typing…" dots first; older bubbles scroll away (4 on screen at most).
+Sounds (`tools/sfx_opener01.py`, synthesised): your messages = rising "pop"; friends' = two-note ding, preceded by soft
+typing clicks while the "typing…" dots show.
