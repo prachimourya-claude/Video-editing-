@@ -105,13 +105,14 @@ one by one, then the salon line and "DM to order".
 
 ## Chosen: Group Chat, the creator's trip story
 
-**Final:** `can_opener_reel_final_voice.mp4`: 59s, the creator's voiceover (`voiceover.txt`, voice note AUD-20261029-WA0024)
+**Final:** `can_opener_reel_final_voice.mp4`: 59s, the creator's voiceover (`voiceover.txt`: re-recorded opening AUD-20261029-WA0025,
+rest from AUD-20261029-WA0024, both levelled to the same loudness)
 over the chat, with the chat sounds ducked under it; music added on Instagram. Floating "No broken nails!" text as the
 chocolate opener lifts the tab; last bubble "DM to get yours now 📩".
 Render: `cd tools && python3 render_opener01.py <workdir> <workdir>/opener_video_only.mp4`,
 `python3 sfx_opener01.py <workdir> <workdir>/opener_sfx.wav`, then `tools/mix_opener01_vo.sh <workdir>`.
 
-Voice lands at 0.3s (trip), 6.2s (problem / nails), 12.3s (thought to print one), 21.3s (got these printed),
+Voice lands at 0.3s (trip, pretty nails), 6.2s (couldn't open the can), 12.8s (thought to print one), 21.7s (got these printed),
 42.6s (customise, shapes and colours), 55.9s (DM to get yours now).
 
 | Time | Footage | Chat |
