@@ -1,10 +1,10 @@
 """Render the can-opener reel (heart + chocolate ring-pull openers for long nails) in the "Group Chat" look:
 the creator's own story, told as phone chat bubbles over the real footage. A trip chat with friends (nails done, can't
 open a can, wish there was something small and cute for the keychain, so I made one), then a salon chat (custom names,
-bulk), a quick "more shapes" glimpse and "DM to order". 44s (paced so every bubble can be read), no voice (music added on Instagram).
+bulk), a quick "more shapes" glimpse and "DM to order". 53.5s (~3s per bubble so every message can be read), no voice (music added on Instagram).
 
 usage: cd tools && python3 render_opener01.py <workdir> <out.mp4> [segment ...]
-<workdir>/src holds O18-O22.mp4 + P1/P2.jpg, <workdir>/refs/crop_*.jpg (see more_shapes_opener.py), fonts/ as before.
+<workdir>/src holds O18-O22.mp4, N1.mp4 (Pinterest nails clip) + P1/P2.jpg, <workdir>/refs/crop_*.jpg (see more_shapes_opener.py), fonts/ as before.
 """
 import math, subprocess, sys
 from concurrent.futures import ProcessPoolExecutor
@@ -25,36 +25,37 @@ INK = (20, 20, 22)
 
 # (name, start, end, footage) - footage: ("clip", source start, source end) or ("photo", P1/P2, zoom from, zoom to)
 SEGMENTS = [
-    ("c1", 0.0, 7.0, ("clip", "O20", 0.0, 2.5)),      # can in hand: the trip / nails / can problem
-    ("c1b", 7.0, 13.5, ("clip", "O22", 0.0, 14.0)),   # prints waiting on the bed: "wish I had something…"
-    ("c2", 13.5, 17.0, ("clip", "O22", 15.0, 27.0)),  # bed flexed, openers pop off: "so I made one"
-    ("c3", 17.0, 22.5, ("clip", "O20", 3.2, 15.0)),   # heart opens the can
-    ("c4", 22.5, 26.5, ("clip", "O18", 2.0, 12.0)),   # chocolate opens the can
-    ("c5", 26.5, 30.0, ("clip", "O19", 15.5, 23.5)),  # both held at the printer: keychain hole
-    ("c6", 30.0, 37.0, ("photo", "P2", 1.0, 1.12)),   # salon chat over the initials close-up
-    ("c7", 37.0, 41.0, ("shapes",)),                  # more shapes glimpse
-    ("c8", 41.0, 44.0, ("photo", "P1", 1.0, 1.08)),   # DM to order
+    ("c0", 0.0, 6.0, ("clip", "N1", 0.0, 4.45)),      # fresh nails (Pinterest clip): "got my nails done"
+    ("c1", 6.0, 12.0, ("clip", "O20", 0.0, 2.5)),     # can in hand: "can't open my can"
+    ("c1b", 12.0, 18.5, ("clip", "O22", 0.0, 14.0)),  # prints waiting on the bed: "wish I had something…"
+    ("c2", 18.5, 22.5, ("clip", "O22", 15.0, 27.0)),  # bed flexed, openers pop off: "so I made one"
+    ("c3", 22.5, 28.5, ("clip", "O20", 3.2, 15.0)),   # heart opens the can
+    ("c4", 28.5, 33.0, ("clip", "O18", 2.0, 12.0)),   # chocolate opens the can
+    ("c5", 33.0, 37.0, ("clip", "O19", 15.5, 23.5)),  # both held at the printer: keychain hole
+    ("c6", 37.0, 46.0, ("photo", "P2", 1.0, 1.12)),   # salon chat over the initials close-up
+    ("c7", 46.0, 50.0, ("shapes",)),                  # more shapes glimpse
+    ("c8", 50.0, 53.5, ("photo", "P1", 1.0, 1.08)),   # DM to order
 ]
-CHAT_SWITCH = 30.0  # trip chat -> salon chat
+CHAT_SWITCH = 37.0  # trip chat -> salon chat
 
-# chat bubbles: (appear time, chat, right side?, text, emoji, sender name); ~2.2s apart so each can be read
+# chat bubbles: (appear time, chat, right side?, text, emoji, sender name); ~3s apart so each can be read
 CHAT_A = ("trip gang", "Riya, Sana, you")
 CHAT_B = ("Your Nail Studio", "business account")
 BUBBLES = [
-    (0.5, "A", False, "how's the trip?", "🏔", "Riya"),
-    (2.5, "A", True, "amazing! got my nails done", "💅", None),
-    (4.7, "A", True, "but now I can't open my can", "😭", None),
-    (7.0, "A", False, "lol the long nail struggle", None, "Sana"),
-    (9.2, "A", True, "wish I had something small + cute", None, None),
-    (11.4, "A", True, "that I could just hang on my bag", "🔑", None),
-    (13.8, "A", True, "so I made one", "🤭", None),
-    (17.8, "A", False, "WAIT it works??", "😳", "Riya"),
-    (23.0, "A", True, "chocolate one too", "🍫", None),
-    (27.0, "A", True, "has a keychain hole", "✨", None),
-    (30.5, "B", False, "can you put my salon name on it?", None, "Your Nail Studio"),
-    (32.8, "B", True, "yes, any name", "✨", None),
-    (35.0, "B", True, "bulk for salons too", "🎀", None),
-    (41.4, "B", True, "DM to order", "📩", None),
+    (0.6, "A", False, "how's the trip?", "🏔", "Riya"),
+    (3.4, "A", True, "amazing! got my nails done", "💅", None),
+    (6.4, "A", True, "but now I can't open my can", "😭", None),
+    (9.3, "A", False, "lol the long nail struggle", None, "Sana"),
+    (12.3, "A", True, "wish I had something small + cute", None, None),
+    (15.4, "A", True, "that I could just hang on my bag", "🔑", None),
+    (18.8, "A", True, "so I made one", "🤭", None),
+    (23.4, "A", False, "WAIT it works??", "😳", "Riya"),
+    (29.0, "A", True, "chocolate one too", "🍫", None),
+    (33.4, "A", True, "has a keychain hole", "✨", None),
+    (37.6, "B", False, "can you put my salon name on it?", None, "Your Nail Studio"),
+    (40.6, "B", True, "yes, any name", "✨", None),
+    (43.4, "B", True, "bulk for salons too", "🎀", None),
+    (50.4, "B", True, "DM to order", "📩", None),
 ]
 TOP = 175        # first bubble y
 MAX_SHOWN = 4    # older bubbles scroll away
