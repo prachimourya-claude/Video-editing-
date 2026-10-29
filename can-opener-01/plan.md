@@ -113,7 +113,7 @@ Render: `cd tools && python3 render_opener01.py <workdir> <workdir>/opener_video
 `python3 sfx_opener01.py <workdir> <workdir>/opener_sfx.wav`, then `tools/mix_opener01_vo.sh <workdir>`.
 
 Voice lands at 0.3s (trip, pretty nails), 6.2s (couldn't open the can), 12.8s (thought to print one), 21.7s (got these printed),
-42.6s (customise, shapes and colours), 55.9s (DM to get yours now).
+42.8s (customise, shapes and colours; false start + room murmur trimmed), 55.9s (DM to get yours now).
 
 | Time | Footage | Chat |
 |---|---|---|

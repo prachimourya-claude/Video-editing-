@@ -14,7 +14,7 @@ CUTS=(
   "clean2 6.00 12.50 6.20"   # but the problem came when I couldn't open the can because of my long nails
   "clean 9.60 18.35 12.80"   # So I thought I should print a can opener which is cute, easy to carry ... without damaging my nails
   "clean 20.20 22.50 21.70"  # So I got these printed
-  "clean 22.30 31.25 42.60"  # And you can customise it by adding your name, different shapes and colours are available
+  "clean 25.60 31.25 42.80"  # And you can customise it ... (starts after a false start + 3s of room murmur at 22.3-25.6)
   "clean 32.40 34.50 55.90"  # DM to get yours now
 )
 # same clean-up chain for both recordings, then each levelled to the same loudness so the join doesn't show
