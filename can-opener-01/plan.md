@@ -1,0 +1,74 @@
+# Can openers for long nails — heart + chocolate bar (PSOne Labs)
+
+3D-printed ring-pull (can tab) openers for long nails: a heart (with a keychain hole and raised initials, e.g. "PS")
+and a chocolate bar with a bite out of the corner. Audiences: girls with long nails / nail art (B2C) and nail techs /
+salons who give them to clients, personalised with the salon's name (B2B). More shapes coming: bows, cats, etc.
+
+Rules carried over from the client: real footage full screen as the hero, light animation, readable text (no thin white
+text on bright backgrounds), simple natural words, voice-only export (music added on Instagram), "DM to order" on screen.
+
+## Footage
+
+| Clip | File | What's in it |
+|---|---|---|
+| O18 | VID-20261029-WA0018 (23s) | Chocolate opener lifting a can tab |
+| O19 | VID-20261029-WA0019 (24s) | Chocolate, then heart, held up at the printer |
+| O20 | VID-20261029-WA0020 (24s) | Heart opener lifting a can tab |
+| O21 | VID-20261029-WA0021 (76s) | Cleaning the edges with pliers, finished pieces |
+| O22 | VID-20261029-WA0022 (85s) | Prints on the bed, bed flexed so they pop off, pieces held |
+| P1/P2 | photos | Both openers held at the printer; P2 shows the "PS" initials clearly |
+
+## Name ideas
+
+Nail-Saver Can Opener (recommended: says exactly what it does, easy to search) · Tab Buddy · Sip Saver · PopPal ·
+Mani-Safe Opener · Sip & Slay Opener · Heart Tab Opener / Choco Tab Opener (per shape).
+
+## Option 1 — Pink Glam (nail-girl POV, B2C first, B2B at the end)
+
+Look: blush pink + cocoa, bold rounded text on tilted pink pills, tiny drawn hearts and sparkles that pop in.
+
+| Time | Clip | Voice | On screen |
+|---|---|---|---|
+| 0–3 | O20 0–3s, can in hand | Nails done, aur ab can kholna hai? | "POV: fresh nails" / "+ a can you can't open" |
+| 3–8 | O20 3–15s (2.4x), heart lifts the tab | Bas ye heart wala opener lagao… aur can khul gaya. | "Heart can opener" |
+| 8–12 | O18 2–12s (2.5x), chocolate lifts the tab | Chocolate wala bhi hai. | "Chocolate one too" |
+| 12–16 | O22 15–27s (3x), bed flexed, pieces pop off | Dono humne 3D print kiye hain. | "3D printed by us" |
+| 16–20 | P2 photo, slow push on the initials | Aur aap apna naam bhi likhwa sakte ho. | "your name here" → arrow to the initials |
+| 20–25 | O19 16–24s, both held | Nail techs, apne clients ko apne salon ke naam wala opener do. | "Nail techs, this one's for you" / "Your salon's name on every opener" |
+| 25–28 | end card | Bows, cats aur bhi shapes jaldi aa rahe hain. | bow · cat · heart icons, "Bulk orders · DM us" |
+
+## Option 2 — Chocolate Studio (made-in-our-studio, calm)
+
+Look: cream + cocoa, elegant serif on cocoa pills, small caps; nothing else on the footage; straight cuts.
+
+| Time | Clip | Voice | On screen |
+|---|---|---|---|
+| 0–4 | O22 0–14s (3.5x), prints on the bed | Another day, another product. | "Printed in our studio" / "HEART & CHOCOLATE CAN OPENERS" |
+| 4–8 | O22 15–27s (3x), bed flexed, pop off | Is baar humne banaye hain can openers, heart aur chocolate shape mein. | — |
+| 8–12 | O21 15–35s (5x), edges cleaned with pliers | — | "Finished by hand" |
+| 12–20 | O20 + O18, tab lifted | Long nails wale ab bina nail tode can khol sakte hain. | "Made for long nails" |
+| 20–24 | P2 photo, initials | Naam bhi customise ho jayega. | "Custom names" |
+| 24–28 | P1 photo, end card | Nail salons ke liye bulk orders bhi le rahe hain. | card: Custom names · For salons & nail techs · DM TO ORDER |
+
+## Option 3 — Lilac Salon (B2B pitch for nail techs)
+
+Look: lilac + rose gold "salon" palette; lilac band on top with the footage in a rounded rose-gold card; sticker labels;
+drawn bow / cat / heart icons for the coming-soon line.
+
+| Time | Clip | Voice | On screen |
+|---|---|---|---|
+| 0–3 | O18 9s, chocolate on the tab | Nail techs, ye aapke clients ke liye hai. | "Long nails?" / "No more broken nails on cans" |
+| 3–9 | O18 + O20 (2.5x), both open a can | Fresh nails ke baad can kholna? Ab tension nahi. | — |
+| 9–14 | P2 photo, initials | Aapke salon ka naam bhi print kar denge. | "Custom for your salon" |
+| 14–19 | O22 15–27s, pop off the bed | Hum khud 3D print karte hain, bulk mein bhi. | "Printed in-house" |
+| 19–24 | O19 both held | Har client ke liye ek chhota sa cute gift. | "A cute add-on for every client" |
+| 24–28 | end card | Bows, cats aur bhi shapes aa rahe hain. Bulk orders ke liye DM karo. | bow · cat · heart, "Bulk & custom names · DM us" |
+
+## B2B pitch points (for the reel, caption and DMs)
+
+- A small take-home gift for every nail client: protects fresh nails, keeps the salon's name in their bag.
+- Personalised with the salon's name or logo initials; the heart has a keychain hole.
+- Bulk orders for salons and nail academies; mix shapes (heart, chocolate; bows and cats coming).
+- Also for: bridal / mehendi return gifts, girls' night kits, influencers' PR boxes.
+
+Stills: `style_options/` (hook + B2B still for each option; `cd tools && python3 style_options_opener01.py <workdir> <outdir>`).
