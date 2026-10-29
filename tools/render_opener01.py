@@ -1,0 +1,189 @@
+"""Render the can-opener reel (heart + chocolate ring-pull openers for long nails) in the "Group Chat" look:
+the creator's own story, told as phone chat bubbles over the real footage. A trip chat with friends (nails done, can't
+open a can, wish there was something small and cute for the keychain, so I made one), then a salon chat (custom names,
+bulk), a quick "more shapes" glimpse and "DM to order". ~30.5s, no voice (music added on Instagram).
+
+usage: cd tools && python3 render_opener01.py <workdir> <out.mp4> [segment ...]
+<workdir>/src holds O18-O22.mp4 + P1/P2.jpg, <workdir>/refs/crop_*.jpg (see more_shapes_opener.py), fonts/ as before.
+"""
+import math, subprocess, sys
+from concurrent.futures import ProcessPoolExecutor
+from PIL import Image, ImageDraw, ImageFont
+
+import render_diwali01 as R
+import style_options_opener01 as O
+import style_options_opener02 as C
+import more_shapes_opener as M
+from render_diwali01 import W, H, FPS, clamp, ease_out, ease_back, paste_center
+
+OUT = sys.argv[2]
+ONLY = sys.argv[3:]
+F = R.BASE + "/fonts/"
+font = lambda name, s: ImageFont.truetype(F + name, s)
+CLEAN = "eq=contrast=1.04:saturation=1.08,unsharp=5:5:0.5"
+INK = (20, 20, 22)
+
+# (name, start, end, footage) - footage: ("clip", source start, source end) or ("photo", P1/P2, zoom from, zoom to)
+SEGMENTS = [
+    ("c1", 0.0, 7.0, ("clip", "O20", 0.0, 3.2)),     # can in hand: the trip / nails / can problem
+    ("c2", 7.0, 10.0, ("clip", "O22", 15.0, 27.0)),  # bed flexed, openers pop off: "so I made one"
+    ("c3", 10.0, 14.5, ("clip", "O20", 3.2, 15.0)),  # heart opens the can
+    ("c4", 14.5, 18.0, ("clip", "O18", 2.0, 12.0)),  # chocolate opens the can
+    ("c5", 18.0, 20.5, ("clip", "O19", 15.5, 23.5)), # both held at the printer: keychain hole
+    ("c6", 20.5, 25.0, ("photo", "P2", 1.0, 1.12)),  # salon chat over the initials close-up
+    ("c7", 25.0, 28.0, ("shapes",)),                 # more shapes glimpse
+    ("c8", 28.0, 30.5, ("photo", "P1", 1.0, 1.08)),  # DM to order
+]
+
+# chat bubbles: (appear time, chat, right side?, text, emoji, sender name)
+CHAT_A = ("trip gang", "Riya, Sana, you")
+CHAT_B = ("Your Nail Studio", "business account")
+BUBBLES = [
+    (0.4, "A", False, "how's the trip?", "🏔", "Riya"),
+    (1.4, "A", True, "amazing! got my nails done", "💅", None),
+    (2.6, "A", True, "but now I can't open my can", "😭", None),
+    (3.9, "A", False, "lol the long nail struggle", None, "Sana"),
+    (5.0, "A", True, "wish I had something small + cute", None, None),
+    (6.0, "A", True, "that I could just hang on my bag", "🔑", None),
+    (7.4, "A", True, "so I made one", "🤭", None),
+    (10.6, "A", False, "WAIT it works??", "😳", "Riya"),
+    (14.9, "A", True, "chocolate one too", "🍫", None),
+    (18.4, "A", True, "has a keychain hole", "✨", None),
+    (21.0, "B", False, "can you put my salon name on it?", None, "Your Nail Studio"),
+    (22.4, "B", True, "yes, any name", "✨", None),
+    (23.6, "B", True, "bulk for salons too", "🎀", None),
+    (28.4, "B", True, "DM to order", "📩", None),
+]
+TOP = 175        # first bubble y
+MAX_SHOWN = 4    # older bubbles scroll away
+
+
+def header(title, sub):
+    im = Image.new("RGBA", (W, 150), (248, 248, 250, 245))
+    d = ImageDraw.Draw(im)
+    d.text((40, 75), "‹", font=font("inter_b.ttf", 70), fill=(10, 132, 255), anchor="lm")
+    d.ellipse((100, 30, 190, 120), fill=(255, 190, 215, 255))
+    paste_center(im, C.emoji("💅", 52), 145, 75)
+    d.text((215, 54), title, font=font("inter_b.ttf", 42), fill=INK, anchor="lm")
+    d.text((215, 104), sub, font=font("inter_m.ttf", 30), fill=(140, 140, 150), anchor="lm")
+    d.line((0, 149, W, 149), fill=(210, 210, 216, 255), width=2)
+    return R.with_shadow(im, offset=(0, 4), blur=10, alpha=60, color=(0, 0, 0))
+
+
+def typing():
+    im = Image.new("RGBA", (170, 96), (0, 0, 0, 0))
+    ImageDraw.Draw(im).rounded_rectangle((0, 0, 160, 88), radius=44, fill=(236, 236, 240, 255))
+    return im
+
+
+class Chat:
+    def __init__(self):
+        self.headers = {"A": header(*CHAT_A), "B": header(*CHAT_B)}
+        self.imgs = [C.bubble(text, right, emo, name if not right else None, maxw=1010) for _, _, right, text, emo, name in BUBBLES]
+        self.typing = typing()
+
+    def draw(self, f, t, show=True):
+        if not show:
+            return
+        chat = "B" if t >= 20.5 else "A"
+        f.alpha_composite(self.headers[chat], (-20, -20))
+        shown = [i for i, b in enumerate(BUBBLES) if b[1] == chat and b[0] <= t][-MAX_SHOWN:]
+        # typing dots before the next friend's (left) bubble
+        nxt = [i for i, b in enumerate(BUBBLES) if b[1] == chat and t < b[0] <= t + 0.7 and not b[2]]
+        y = TOP
+        for k, i in enumerate(shown):
+            at, _, right, *_ = BUBBLES[i]
+            im = self.imgs[i]
+            p = ease_out((t - at) / 0.3)
+            s = 0.85 + 0.15 * ease_back((t - at) / 0.35)
+            x = W - im.width - 24 if right else 24
+            paste_center(f, im, x + im.width / 2, y + im.height / 2 + 20 * (1 - p), p, s)
+            y += im.height + 8
+        if nxt:
+            d = ImageDraw.Draw(f)
+            f.alpha_composite(self.typing, (34, int(y)))
+            for j in range(3):
+                a = 0.45 + 0.55 * (0.5 + 0.5 * math.sin(t * 10 - j * 1.1))
+                cx = 34 + 46 + j * 34
+                d.ellipse((cx - 11, y + 33, cx + 11, y + 55), fill=(150, 150, 158, int(255 * a)))
+
+
+def photo_frames(name, z0, z1, n):
+    base = O.photo_full(name, 0.4)
+    for i in range(n):
+        z = z0 + (z1 - z0) * i / max(1, n - 1)
+        cw, ch = W / z, H / z
+        x0, y0 = (W - cw) / 2, (H - ch) * 0.45
+        yield base.resize((W, H), Image.BILINEAR, box=(x0, y0, x0 + cw, y0 + ch))
+
+
+def shapes_frames(n):
+    tiles = [M.tile(nm) for nm in M.NAMES]
+    title = font("poppins_xb.ttf", 100)
+    sub = font("inter_m.ttf", 42)
+    tag = R.pill("reference designs · made to order", font("inter_m.ttf", 34), fg=(255, 255, 255), bg=(60, 40, 50), pad=(30, 14))
+    for i in range(n):
+        lt = i / FPS
+        f = Image.new("RGBA", (W, H), (255, 240, 246, 255))
+        d = ImageDraw.Draw(f)
+        d.text((W / 2, 170), "More shapes", font=title, fill=(60, 40, 50), anchor="mm")
+        d.text((W / 2, 270), "any colour · your name on it", font=sub, fill=(150, 90, 120), anchor="mm")
+        for k, tl in enumerate(tiles):
+            r, c = divmod(k, 3)
+            st = 0.15 + k * 0.12
+            p = ease_out((lt - st) / 0.3)
+            if p > 0:
+                paste_center(f, tl, W / 2 + (c - 1) * 340, 590 + r * 430 + 30 * (1 - p), p, 0.85 + 0.15 * ease_back((lt - st) / 0.4))
+        paste_center(f, tag, W / 2, 1840, ease_out((lt - 1.4) / 0.3))
+        yield f
+
+
+def end_overlay(f, lt):
+    pill = R.pill("Order now  ·  DM to order", font("poppins_xb.ttf", 50), fg=(255, 255, 255), bg=(10, 132, 255), pad=(50, 24))
+    if lt > 0.7:
+        pulse = 1 + 0.035 * math.sin((lt - 0.7) * 7)
+        paste_center(f, pill, W / 2, 1780, ease_out((lt - 0.7) / 0.3), pulse * (0.7 + 0.3 * ease_back((lt - 0.7) / 0.4)))
+
+
+def render(seg):
+    name, t0, t1, src = seg
+    n = int(round((t1 - t0) * FPS))
+    if src[0] == "clip":
+        frames = R.footage(src[1], src[2], src[3] - src[2], t1 - t0, (1.0, 1.04), (0.5, 0.55), grade=CLEAN)
+    elif src[0] == "photo":
+        frames = photo_frames(src[1], src[2], src[3], n)
+    else:
+        frames = shapes_frames(n)
+    chat = Chat()
+    out = f"{R.SEG}/{name}.mp4"
+    p = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS),
+                          "-i", "-", "-frames:v", str(n), "-c:v", "libx264", "-preset", "medium", "-crf", "17",
+                          "-pix_fmt", "yuv420p", out], stdin=subprocess.PIPE)
+    count = 0
+    for i, f in enumerate(frames):
+        if count >= n:
+            break
+        t = t0 + i / FPS
+        chat.draw(f, t, show=src[0] != "shapes")
+        if name == "c8":
+            end_overlay(f, t - t0)
+            fo = clamp((t - (t1 - 0.35)) / 0.35)
+            if fo > 0:
+                f.alpha_composite(Image.new("RGBA", (W, H), (0, 0, 0, int(255 * fo))))
+        p.stdin.write(f.convert("RGB").tobytes())
+        count += 1
+    p.stdin.close()
+    p.wait()
+    return f"{name}: {count}/{n} frames"
+
+
+if __name__ == "__main__":
+    todo = [s for s in SEGMENTS if not ONLY or s[0] in ONLY]
+    with ProcessPoolExecutor(4) as ex:
+        for r in ex.map(render, todo):
+            print(r, flush=True)
+    lst = f"{R.SEG}/opener_list.txt"
+    with open(lst, "w") as fh:
+        fh.writelines(f"file '{s[0]}.mp4'\n" for s in SEGMENTS)
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", lst, "-c", "copy", OUT], check=True)
+    print("wrote", OUT)
