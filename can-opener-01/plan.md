@@ -94,3 +94,11 @@ both held (O19 / P1) → initials close-up (P2) → end.
   "Naam bhi daal dete hain, salon ka bhi." · "Nail techs, apne clients ko de ke dekho." · "Bows aur cats bhi aa rahe hain."
 - **B — no voice:** the chat / receipt / magazine text tells the story; add a trending song on Instagram.
 - **C — two lines only:** "Nails done? Can pe nail mat todo, ye use karo." · "Salon wale? Apna naam likhwa lo, DM karo."
+
+## "More shapes" glimpse
+
+`more_shapes_glimpse.png` (`cd tools && python3 more_shapes_opener.py <workdir> <out.png>`): tight product crops from the
+client's reference screenshots (ghost, lemon, nail polish, daisy, bow, butterfly, mermaid tail, bow on can, flowers), tagged
+"reference designs · made to order". The client checks each model's licence before printing an order. Photos with a
+watermark or text over the product (the paw) are left out rather than edited. In the reel: ~3s near the end, tiles pop in
+one by one, then the salon line and "DM to order".
