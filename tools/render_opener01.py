@@ -1,7 +1,8 @@
 """Render the can-opener reel (heart + chocolate ring-pull openers for long nails) in the "Group Chat" look:
 the creator's own story, told as phone chat bubbles over the real footage. A trip chat with friends (nails done, can't
 open a can, wish there was something small and cute for the keychain, so I made one), then a salon chat (custom names,
-bulk), a quick "more shapes" glimpse and "DM to order". 59s (~3s per bubble; both openers shown until the can opens), no voice (music added on Instagram).
+bulk), a quick "more shapes" glimpse and "DM to get yours now". 59s (~3s per bubble; both openers shown until the can
+opens); floating "No broken nails!" as the chocolate one opens the can. Voice + chat sounds: tools/mix_opener01_vo.sh.
 
 usage: cd tools && python3 render_opener01.py <workdir> <out.mp4> [segment ...]
 <workdir>/src holds O18-O22.mp4, N1.mp4 (Pinterest nails clip) + P1/P2.jpg, <workdir>/refs/crop_*.jpg (see more_shapes_opener.py), fonts/ as before.
@@ -52,12 +53,11 @@ BUBBLES = [
     (18.8, "A", True, "so I made one", "🤭", None),
     (23.4, "A", False, "WAIT it works??", "😳", "Riya"),
     (30.0, "A", True, "chocolate one too", "🍫", None),
-    (36.7, "A", True, "no broken nails", "💅", None),
     (38.9, "A", True, "has a keychain hole", "✨", None),
     (43.1, "B", False, "can you put my salon name on it?", None, "Your Nail Studio"),
     (46.1, "B", True, "yes, any name", "✨", None),
     (48.9, "B", True, "bulk for salons too", "🎀", None),
-    (55.9, "B", True, "DM to order", "📩", None),
+    (55.9, "B", True, "DM to get yours now", "📩", None),
 ]
 TOP = 175        # first bubble y
 MAX_SHOWN = 4    # older bubbles scroll away
@@ -143,6 +143,28 @@ def shapes_frames(n):
         yield f
 
 
+def floating_text(f, lt):
+    """'No broken nails!' floats up and bobs over the chocolate opener as the tab lifts (c4b)."""
+    if lt < 3.0:
+        return
+    e = lt - 3.0
+    if not hasattr(floating_text, "im"):
+        from render_diwali01 import text_mask
+        m = text_mask("No broken nails!", font("poppins_xb.ttf", 96))
+        txt = Image.new("RGBA", m.size, (255, 255, 255, 0))
+        txt.putalpha(m)
+        w, h = txt.width + 80, txt.height + 40
+        card = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+        ImageDraw.Draw(card).rounded_rectangle((0, 0, w - 1, h - 1), radius=h // 2, fill=(240, 90, 150, 240))
+        card.alpha_composite(txt, (40, 20))
+        floating_text.im = R.with_shadow(card, offset=(0, 10), blur=16, alpha=110, color=(60, 10, 30))
+        floating_text.nail = C.emoji("💅", 90)
+    a = ease_out(e / 0.35)
+    y = 1450 - 60 * ease_out(e / 0.6) + 10 * math.sin(e * 4)
+    paste_center(f, floating_text.im, W / 2, y, a, (0.7 + 0.3 * ease_back(e / 0.45)) * (1 + 0.02 * math.sin(e * 6)))
+    paste_center(f, floating_text.nail, W / 2 + floating_text.im.width / 2 - 20, y - 70, a, 1, rot=12 * math.sin(e * 3))
+
+
 def end_overlay(f, lt):
     pill = R.pill("Order now  ·  DM to order", font("poppins_xb.ttf", 50), fg=(255, 255, 255), bg=(10, 132, 255), pad=(50, 24))
     if lt > 0.7:
@@ -170,6 +192,8 @@ def render(seg):
             break
         t = t0 + i / FPS
         chat.draw(f, t, show=src[0] != "shapes")
+        if name == "c4b":
+            floating_text(f, t - t0)
         if name == "c8":
             end_overlay(f, t - t0)
             fo = clamp((t - (t1 - 0.35)) / 0.35)

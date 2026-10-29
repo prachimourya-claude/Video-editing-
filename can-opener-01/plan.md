@@ -105,10 +105,14 @@ one by one, then the salon line and "DM to order".
 
 ## Chosen: Group Chat, the creator's trip story
 
-`can_opener_reel_group_chat_v4.mp4`: 59s, chat sound effects only (music added on Instagram). v4 plays both openers until
-the can is open (chocolate ending at near real speed) and adds message "pop"/ding sounds and typing clicks.
-Render: `cd tools && python3 render_opener01.py <workdir> <workdir>/opener_video_only.mp4`, then
-`python3 sfx_opener01.py <workdir> <workdir>/opener_sfx.wav` and mux the two.
+**Final:** `can_opener_reel_final_voice.mp4`: 59s, the creator's voiceover (`voiceover.txt`, voice note AUD-20261029-WA0024)
+over the chat, with the chat sounds ducked under it; music added on Instagram. Floating "No broken nails!" text as the
+chocolate opener lifts the tab; last bubble "DM to get yours now 📩".
+Render: `cd tools && python3 render_opener01.py <workdir> <workdir>/opener_video_only.mp4`,
+`python3 sfx_opener01.py <workdir> <workdir>/opener_sfx.wav`, then `tools/mix_opener01_vo.sh <workdir>`.
+
+Voice lands at 0.3s (trip), 6.2s (problem / nails), 12.3s (thought to print one), 21.3s (got these printed),
+42.6s (customise, shapes and colours), 55.9s (DM to get yours now).
 
 | Time | Footage | Chat |
 |---|---|---|
@@ -118,11 +122,11 @@ Render: `cd tools && python3 render_opener01.py <workdir> <workdir>/opener_video
 | 18.5–22.5 | O22 bed flexed, openers pop off | "so I made one 🤭" |
 | 22.5–29.5 | O20 heart hooked on, lifted, can open | Riya "WAIT it works?? 😳" |
 | 29.5–33.5 | O18 chocolate hooked on | "chocolate one too 🍫" |
-| 33.5–38.5 | O18 chocolate opening, near real speed | "no broken nails 💅" (as the tab lifts) |
+| 33.5–38.5 | O18 chocolate opening, near real speed | floating "No broken nails! 💅" as the tab lifts |
 | 38.5–42.5 | O19 both held | "has a keychain hole ✨" |
 | 42.5–51.5 | P2 initials (slow zoom) | Your Nail Studio: "can you put my salon name on it?" · "yes, any name ✨" · "bulk for salons too 🎀" |
 | 51.5–55.5 | More shapes grid (tiles pop in) | — |
-| 55.5–59 | P1 both openers | "DM to order 📩" + "Order now · DM to order" |
+| 55.5–59 | P1 both openers | "DM to get yours now 📩" + "Order now · DM to order" |
 
 Sounds (`tools/sfx_opener01.py`, synthesised): your messages = rising "pop"; friends' = two-note ding, preceded by soft
 typing clicks while the "typing…" dots show.
